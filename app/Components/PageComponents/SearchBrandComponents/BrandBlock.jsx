@@ -3,16 +3,18 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
 import {config} from "../../../config";
 import ExampleImg from './ExampleImg.png'
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {useNavigation} from "@react-navigation/native";
 const BrandBlock = ({letter, img}) => {
     letter = 'A'
     img = ExampleImg
+    const navigation = useNavigation()
     return (
         <View>
             <Text style={styles.letterStyle}>
                 {letter}
             </Text>
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('SelectedBrandPage')}>
                     <Image style={styles.imageStyle} source={img}/>
                 </TouchableOpacity>
                 <Image style={styles.imageStyle} source={img}/>

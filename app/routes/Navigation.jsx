@@ -9,6 +9,7 @@ import ProductPage from "../Pages/ProductPage/ProductPage";
 import CategoryPage from "../Pages/CategoryPage/CategoryPage";
 import BrandsPage from "../Pages/BrandsPage/BrandsPage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
+import SelectedBrandPage from "../Pages/SelectedBrandPage/SelectedBrandPage";
 const Stack = createNativeStackNavigator()
 const Navigation = () => {
 
@@ -42,6 +43,10 @@ const Navigation = () => {
                     headerShown: false,
                     navigationBarHidden: true
                 }} />
+                <Stack.Screen name='SelectedBrandPage' component={SelectedBrandPage} options={{
+                    headerShown: false,
+                    navigationBarHidden: true
+                }}  />
             </Stack.Navigator>
         </NavigationContainer>
     )

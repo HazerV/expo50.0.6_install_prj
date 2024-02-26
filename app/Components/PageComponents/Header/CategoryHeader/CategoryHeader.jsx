@@ -2,7 +2,6 @@ import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import SearchSvg from "../../../../../assets/icons/HeaderIcons/SearchJs";
 import ArrowSvg from "../../../../../assets/icons/GoBack/GoBackBlackJs";
-// import ArrowSvg from "../../../../../assets/icons/ArrowJs";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import {useNavigation} from "@react-navigation/native";

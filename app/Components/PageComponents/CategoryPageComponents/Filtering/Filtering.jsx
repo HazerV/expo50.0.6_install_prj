@@ -9,19 +9,7 @@ import ParamsBlack from "../../../../../assets/icons/Filtering/ParamsBlackJs";
 const Filtering = () => {
 
     return (
-        <View style={{flexDirection: 'row', paddingLeft: wp(2.5)}}>
-            {/*<View style={{flexDirection: 'row'}}>*/}
-            {/*     /!*<FilterModal />*!/*/}
-            {/*    <Text style={styles.textForFilters}>*/}
-            {/*        По популярности*/}
-            {/*    </Text>*/}
-            {/*    <View>*/}
-            {/*        <ParamsBlack />*/}
-            {/*        <Text style={styles.textForFilters}>*/}
-            {/*            Фильтры*/}
-            {/*        </Text>*/}
-            {/*    </View>*/}
-            {/*</View>*/}
+        <View style={styles.container}>
             <TouchableOpacity>
                 <View style={styles.forTrash}>
                     <TrashSvg/>
@@ -30,7 +18,7 @@ const Filtering = () => {
             <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
-                <View style={styles.container}>
+                <View style={styles.buttonsContainer}>
                     <ButtonsInFilter text={'0 - 2000 р'}/>
                     <ButtonsInFilter text={'Верхние ноты: цитрусовые'}/>
                     <ButtonsInFilter text={'100 р'}/>
@@ -43,6 +31,10 @@ const Filtering = () => {
 }
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'row',
+        paddingLeft: wp(2.5)
+    },
+    buttonsContainer: {
         columnGap: wp(3.05),
         flexDirection: 'row',
         paddingBottom: wp(4.1),

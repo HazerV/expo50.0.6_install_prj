@@ -1,16 +1,34 @@
 import React from "react";
-import {View, Text, StyleSheet, ScrollView, Image, Linking, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, ScrollView, Image, Linking, TouchableOpacity, Pressable} from "react-native";
 import BrandEx from '../../../../assets/images/BrandEx.png'
 import ArrowSvg from '../../../../assets/icons/ArrowJs'
 import {config} from "../../../config";
+import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {useNavigation} from "@react-navigation/native";
 const BrandsScroll = ({img}) => {
     img = BrandEx
+    const navigation = useNavigation()
     return (
-        <View style={{paddingBottom: 32}}>
+        <View>
+            <View style={styles.align}>
+                <Text style={styles.allBrandsText}>
+                    Бренды
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('BrandPage') }>
+                    <View style={styles.allBrands}>
+                        <Text style={styles.allBrandsText}>
+                            Все
+                        </Text>
+                        <ArrowSvg/>
+                    </View>
+                </TouchableOpacity>
+            </View>
             <ScrollView horizontal={true}
                         showsHorizontalScrollIndicator={false}>
                 <View style={styles.imageBlock}>
-                    <Image source={img}/>
+                    <TouchableOpacity onPress={() => navigation.navigate('SelectedBrandPage')}>
+                        <Image source={img}/>
+                    </TouchableOpacity>
                     <Image source={img}/>
                     <Image source={img}/>
                     <Image source={img}/>
@@ -18,39 +36,37 @@ const BrandsScroll = ({img}) => {
                     <Image source={img}/>
                 </View>
             </ScrollView>
-            <TouchableOpacity>
-                <View style={styles.allBrands}>
-                    <Text style={styles.allBrandsText}>
-                        Все бренды
-                    </Text>
-                    <ArrowSvg/>
-                </View>
-            </TouchableOpacity>
         </View>
     )
-
 }
-
 const styles = StyleSheet.create({
-    imageBlock: {
-        columnGap: 12,
+    containerBrands: {
+        paddingBottom: wp(8),
+        justifyContent: 'space-between',
+        flexDirection: 'column'
+    },
+    align: {
         flexDirection: 'row',
-        paddingBottom: 12,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    imageBlock: {
+        columnGap: wp(3),
+        paddingBottom: wp(3),
+        flexDirection: 'row',
     },
     allBrands: {
-        width: 130,
-        height: 40,
-        backgroundColor: '#F5F5F5',
-        borderRadius: 8,
+        height: wp(10),
+        columnGap: wp(1.5),
+        borderRadius: wp(2),
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        columnGap: 4
     },
     allBrandsText: {
-        fontSize: config.fontMedium,
+        fontSize: config.fontLarge,
         fontFamily: config.familyBold,
-        lineHeight: config.lineMedium,
+        lineHeight: config.lineLarge,
     }
 })
 

@@ -10,15 +10,13 @@ import Filtering from "../../Components/PageComponents/CategoryPageComponents/Fi
 import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/GoodsInCategory";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
 import FooterInfo from "../../Components/PageComponents/InfoPageComp/FooterInfo/FooterInfo";
-
-
+import SortingFilter from "../../Components/GoodsComponents/FilterComponents/SortingFilter/SortingFilter";
 const CategoryPage = () => {
-
     return (
         <View>
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={{height: '100%', backgroundColor: 'white'}}>
+                style={styles.scrollView}>
                 <CategoryHeader text={'Парфюмерия'}/>
                 <View style={styles.container}>
                     <View style={styles.description}>
@@ -29,23 +27,17 @@ const CategoryPage = () => {
                             tempor incididunt ut labore et dolore magna aliqua
                         </Text>
                     </View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        flexWrap: 'wrap',
-                        paddingTop: wp(3.05),
-                        gap: wp(3.05),
-                        paddingBottom: wp(4)
-                    }}>
+                    <View style={styles.buttonsUnderHeader}>
                         <PodCategoryButton text={'Подкатегория '}/>
                         <PodCategoryButton text={'Подкатегория вторая'}/>
                         <PodCategoryButton text={'Подкатегория 2333'}/>
                         <PodCategoryButton text={'Парфюм 7'}/>
                         <PodCategoryButton text={'Духи'}/>
                     </View>
-                    <Filtering />
+
                 </View>
+                <SortingFilter />
+                <Filtering />
                 <View style={styles.mainBlock}>
                     <GoodsInCategory route={'ProductPage'} newPrice={1500} firstPrice={2100} description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
                     <GoodsInCategory newPrice={1700} route={'ProductPage'} firstPrice={2100} description={'Доступен от 5 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
@@ -58,27 +50,19 @@ const CategoryPage = () => {
                 </View>
                 <Footer />
             </ScrollView>
-            <View style={{
-                position: 'absolute',
-                bottom: 0,
-                alignItems: 'center',
-                left: 0,
-                right: 0,
-                paddingBottom: wp(5)
-            }}>
+            <View style={styles.footer}>
                 <ButtonsInFooter />
             </View>
         </View>
     )
-
 }
-
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
     },
+    scrollView: {height: '100%', backgroundColor: 'white'},
     mainBlock: {
         paddingLeft: wp(2.5),
         flexDirection: 'row',
@@ -101,6 +85,23 @@ const styles = StyleSheet.create({
         lineHeight: config.lineMedium,
         fontFamily: config.familyRegular,
         paddingTop: wp(3.05)
+    },
+    buttonsUnderHeader: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        paddingTop: wp(3.05),
+        gap: wp(3.05),
+        paddingBottom: wp(4)
+    },
+    footer: {
+        position: 'absolute',
+        bottom: 0,
+        alignItems: 'center',
+        left: 0,
+        right: 0,
+        paddingBottom: wp(5)
     }
 })
 

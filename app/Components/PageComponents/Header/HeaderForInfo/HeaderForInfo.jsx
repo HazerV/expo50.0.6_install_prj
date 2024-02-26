@@ -27,7 +27,6 @@ const HeaderForInfo = () => {
 }
 
 const styles = StyleSheet.create({
-
     align: {
         width: wp(100),
         flexDirection: 'row',

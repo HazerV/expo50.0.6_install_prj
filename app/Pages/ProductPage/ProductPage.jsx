@@ -90,21 +90,12 @@ const ProductPage = ({id, count}) => {
                 </View>
                 <Footer />
             </ScrollView>
-            <View style={{
-                position: 'absolute',
-                bottom: 0,
-                alignItems: 'center',
-                left: 0,
-                right: 0,
-                paddingBottom: wp(5)
-            }}>
+            <View style={styles.footer}>
                 <ButtonsInFooter />
             </View>
         </View>
     )
-
 }
-
 const styles = StyleSheet.create({
     container: {
         paddingLeft: wp(2.5),
@@ -158,7 +149,6 @@ const styles = StyleSheet.create({
         // display: 'flex',
         // width: '100%',
         alignContent: 'center',
-        alignContent: 'center',
         justifyContent: 'space-between',
         columnGap: wp(1),
         paddingBottom: wp(2),
@@ -180,6 +170,14 @@ const styles = StyleSheet.create({
         fontSize: config.fontMedium,
         lineHeight: config.lineMedium,
         fontFamily: config.familyRegular,
+    },
+    footer: {
+        position: 'absolute',
+        bottom: 0,
+        alignItems: 'center',
+        left: 0,
+        right: 0,
+        paddingBottom: wp(5)
     }
 })
 
