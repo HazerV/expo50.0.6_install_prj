@@ -12,7 +12,7 @@ import MapBanner from "../../Components/PageComponents/InfoPageComp/MapBanner/Ma
 
 const InfoPage = () => {
     return (
-        <SafeAreaView>
+        <View>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={{
@@ -69,7 +69,7 @@ const InfoPage = () => {
                     </View>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 
 }

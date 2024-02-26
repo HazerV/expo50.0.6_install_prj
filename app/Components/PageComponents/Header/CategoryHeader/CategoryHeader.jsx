@@ -1,26 +1,29 @@
 import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import SearchSvg from "../../../../../assets/icons/HeaderIcons/SearchJs";
-import ArrowSvg from "../../../../../assets/icons/ArrowJs";
+import ArrowSvg from "../../../../../assets/icons/GoBack/GoBackBlackJs";
+// import ArrowSvg from "../../../../../assets/icons/ArrowJs";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import {useNavigation} from "@react-navigation/native";
 
-const CategoryHeader = () => {
+const CategoryHeader = ({text}) => {
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
                 <View style={styles.go_back}>
                     <ArrowSvg/>
                 </View>
             </TouchableOpacity>
             <Text style={styles.text_head}>
-                Парфюмерия
+                {text}
             </Text>
-            <View style={styles.search}>
-                <SearchSvg/>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('SearchForPage')}>
+                <View style={styles.search}>
+                    <SearchSvg/>
+                </View>
+            </TouchableOpacity>
         </View>
     )
 
@@ -30,11 +33,11 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         alignItems: 'center',
-        paddingTop: 32,
+        paddingTop: wp(12),
         width: wp(100),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 10,
+        padding: wp(2.5),
         // columnGap: wp(30),
         paddingBottom: 12,
     },

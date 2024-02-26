@@ -1,46 +1,54 @@
-import { StyleSheet, Text, View } from "react-native";
-import Navigation from "./routes/navigation";
-import {useLoadedNavigation} from "expo-router/build/link/useLoadedNavigation";
-import useFonts from "../assets/fonts/fonts";
+// import useFonts from "../assets/fonts/fonts";
 import {useCallback, useContext, useEffect, useState} from "react";
-import navigation from "./routes/navigation";
+import Navigation from "./routes/Navigation";
 import {Context, PageContext} from "./context/Context";
 import * as SplashScreen from 'expo-splash-screen'
+import * as Font from "expo-font";
+import NavigationContainer from "expo-router/build/fork/NavigationContainer.native";
+import {createNativeStackNavigator} from "react-native-screens/native-stack";
+import HomePage from "./Pages/HomePage/HomePage";
+import InfoPage from "./Pages/InfoPage/InfoPage";
 
+const Stack = createNativeStackNavigator()
 export default function Page() {
-
-  const [isReady, setIsReady] = useState(false)
-
-  useEffect(() => {
-    async function prepare () {
-      try {
-        await useFonts()
-        await new Promise (res => setTimeout(res, 200))
-      } catch (e) {
-        console.warn(e)
-      } finally {
-        setIsReady(true)
-      }
+    const [isReady, setIsReady] = useState(false)
+    const useFonts = async () => {
+        await (Font.loadAsync({
+            'Gilroy-Thin': require('../assets/fonts/Gilroy-Thin.ttf'),
+            'Gilroy-Medium': require('../assets/fonts/Gilroy-Medium.ttf'),
+            'Gilroy-Regular': require('../assets/fonts/Gilroy-Regular.ttf'),
+            'Gilroy-SemiBold': require('../assets/fonts/Gilroy-Semibold.ttf')
+        }))
     }
-    prepare()
-  }, []);
 
+    async function prepare() {
+        try {
+            useFonts()
+            await new Promise((res) => setTimeout(res, 2000))
+        } catch (e) {
+            console.warn(e)
+        } finally {
+            setIsReady(true)
+        }
+    }
 
-  const onLayoutView = useCallback(async () => {
+    useEffect(() => {
+        prepare()
+    }, []);
+
+    const onLayoutRootView = useCallback(async () => {
+        if (isReady) {
+            await SplashScreen.hideAsync()
+        }
+    }, [isReady])
     if (!isReady) {
-      await SplashScreen.hideAsync()
+        return null
     }
-  }, [isReady])
-  if (!isReady) {
-    return null
-  }
-
 
     return (
         <Context>
-          <Navigation />
+            <Navigation />
         </Context>
     )
-
 }
 
