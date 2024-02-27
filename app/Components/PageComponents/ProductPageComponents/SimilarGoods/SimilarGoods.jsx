@@ -14,10 +14,7 @@ const SimilarGoods = () => {
                 style={{paddingTop: wp(3)}}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
-                <View style={{
-                    flexDirection: 'row',
-                    columnGap: wp(2)
-                }}>
+                <View style={styles.block}>
                     <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
                                            name={'Духи AMOUAGE Beach Hut (на распив)'}/>
                     <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
@@ -40,12 +37,19 @@ const SimilarGoods = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: wp(5)
+        paddingTop: wp(5),
+        marginLeft: -wp(2.5)
+    },
+    block: {
+        flexDirection: 'row',
+        columnGap: wp(2),
+        paddingLeft: wp(2.5)
     },
     textHead: {
         fontSize: config.fontLarge,
         lineHeight: config.lineLarge,
         fontFamily: config.familyBold,
+        paddingLeft: wp(2.5)
     }
 })
 export default SimilarGoods

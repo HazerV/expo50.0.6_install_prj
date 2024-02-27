@@ -10,6 +10,7 @@ import ThisBrandGoods from "../../Components/PageComponents/ProductPageComponent
 import SimilarGoods from "../../Components/PageComponents/ProductPageComponents/SimilarGoods/SimilarGoods";
 import Footer from "../../Components/PageComponents/Footer/Footer";
 import ProductNullBlock from "../../Components/PageComponents/ProductPageComponents/ProductNullBlock/ProductNullBlock";
+import SliderProduct from "../../Components/PageComponents/ProductPageComponents/SliderProduct/SliderProduct";
 const ProductPage = ({id, count}) => {
     return (
         <View>
@@ -19,27 +20,7 @@ const ProductPage = ({id, count}) => {
             <ScrollView showsVerticalScrollIndicator={false}
                         style={{height: '100%', backgroundColor: 'white'}}>
                 <View style={styles.container}>
-                    <Text style={styles.nameText}>
-                        Pierre Balmain Carbone de Balmain туалетная вода
-                    </Text>
-                    <ScrollView
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}>
-                        <View style={styles.photoSlider}>
-                            <Image
-                                style={styles.image}
-                                source={{uri: 'https://s3-alpha-sig.figma.com/img/6d29/9b1f/3013dd1f1752ec90a44a39afa2806cd1?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HXFJaDdOw-dt8y60040Lzy11X30y~Vc7RzAiOIb6DJ0ctao7kAd8c~aeTnIADPUwfGSU0UMdRJzHHHJ6H98M8-YrffrcXm-CPFuA4rtd42pNeSNXyZ7k4j6DTruVMO9HGCKlTegowYodNezLwGzWiBYSKW2Chkr5aKNsmcTvCiluVAleDg-D0WICQr4PB6BTJdir-fUuY6TutMZ849v8Swd3TfUz1-HM9q-SuB0SQnPX~BjOAD4CwOTOs0JYTdh9l~DJ-C1e4dIMz-DntDMUMUKY5igShx~PoorCCdzvzGIRSF9G1QQzctA-3Ye8~wnGKExIJkt2FNWN2ZSeumPpGg__'}}/>
-                            <Image
-                                style={styles.image}
-                                source={{uri: 'https://s3-alpha-sig.figma.com/img/6d29/9b1f/3013dd1f1752ec90a44a39afa2806cd1?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HXFJaDdOw-dt8y60040Lzy11X30y~Vc7RzAiOIb6DJ0ctao7kAd8c~aeTnIADPUwfGSU0UMdRJzHHHJ6H98M8-YrffrcXm-CPFuA4rtd42pNeSNXyZ7k4j6DTruVMO9HGCKlTegowYodNezLwGzWiBYSKW2Chkr5aKNsmcTvCiluVAleDg-D0WICQr4PB6BTJdir-fUuY6TutMZ849v8Swd3TfUz1-HM9q-SuB0SQnPX~BjOAD4CwOTOs0JYTdh9l~DJ-C1e4dIMz-DntDMUMUKY5igShx~PoorCCdzvzGIRSF9G1QQzctA-3Ye8~wnGKExIJkt2FNWN2ZSeumPpGg__'}}/>
-                            <Image
-                                style={styles.image}
-                                source={{uri: 'https://s3-alpha-sig.figma.com/img/6d29/9b1f/3013dd1f1752ec90a44a39afa2806cd1?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HXFJaDdOw-dt8y60040Lzy11X30y~Vc7RzAiOIb6DJ0ctao7kAd8c~aeTnIADPUwfGSU0UMdRJzHHHJ6H98M8-YrffrcXm-CPFuA4rtd42pNeSNXyZ7k4j6DTruVMO9HGCKlTegowYodNezLwGzWiBYSKW2Chkr5aKNsmcTvCiluVAleDg-D0WICQr4PB6BTJdir-fUuY6TutMZ849v8Swd3TfUz1-HM9q-SuB0SQnPX~BjOAD4CwOTOs0JYTdh9l~DJ-C1e4dIMz-DntDMUMUKY5igShx~PoorCCdzvzGIRSF9G1QQzctA-3Ye8~wnGKExIJkt2FNWN2ZSeumPpGg__'}}/>
-                            <Image
-                                style={styles.image}
-                                source={{uri: 'https://s3-alpha-sig.figma.com/img/6d29/9b1f/3013dd1f1752ec90a44a39afa2806cd1?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HXFJaDdOw-dt8y60040Lzy11X30y~Vc7RzAiOIb6DJ0ctao7kAd8c~aeTnIADPUwfGSU0UMdRJzHHHJ6H98M8-YrffrcXm-CPFuA4rtd42pNeSNXyZ7k4j6DTruVMO9HGCKlTegowYodNezLwGzWiBYSKW2Chkr5aKNsmcTvCiluVAleDg-D0WICQr4PB6BTJdir-fUuY6TutMZ849v8Swd3TfUz1-HM9q-SuB0SQnPX~BjOAD4CwOTOs0JYTdh9l~DJ-C1e4dIMz-DntDMUMUKY5igShx~PoorCCdzvzGIRSF9G1QQzctA-3Ye8~wnGKExIJkt2FNWN2ZSeumPpGg__'}}/>
-                        </View>
-                    </ScrollView>
+                    <SliderProduct />
                     {
                         count === 0 ? (
                             <ProductNullBlock />
@@ -86,9 +67,9 @@ const ProductPage = ({id, count}) => {
                             </Text>
                         </View>
                     </View>
-                    <BrandParfumeBlock />
-                    <ThisBrandGoods />
-                    <SimilarGoods />
+                        <BrandParfumeBlock />
+                        <ThisBrandGoods />
+                        <SimilarGoods />
                 </View>
                 <Footer />
             </ScrollView>
@@ -102,7 +83,7 @@ const styles = StyleSheet.create({
     container: {
         paddingLeft: wp(2.5),
         backgroundColor: 'white',
-        paddingBottom: 250
+        paddingBottom: wp(15)
     },
     image: {
         resizeMode: 'cover',
@@ -116,7 +97,7 @@ const styles = StyleSheet.create({
     photoSlider: {
         flexDirection: 'row',
         gap: wp(3),
-        paddingBottom: wp(6)
+        paddingBottom: wp(6),
     },
     nameText: {
         fontSize: config.fontLarge,
@@ -173,6 +154,7 @@ const styles = StyleSheet.create({
         paddingRight: wp(2.5)
     },
     footer: {
+        paddingTop: 50,
         position: 'absolute',
         bottom: 0,
         alignItems: 'center',
