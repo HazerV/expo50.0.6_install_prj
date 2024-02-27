@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Dimensions, Text, ScrollView, StyleSheet, SafeAreaView} from "react-native";
+import {View, SafeAreaView, Dimensions, Text, ScrollView, StyleSheet, Platform,} from "react-native";
 import ButtonComponents from "../../Components/GoodsComponents/ButtonComponent/ButtonComponents";
 import CategoryHeader from "../../Components/PageComponents/Header/CategoryHeader/CategoryHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -14,10 +14,12 @@ import SortingFilter from "../../Components/GoodsComponents/FilterComponents/Sor
 const CategoryPage = () => {
     return (
         <View>
+            <SafeAreaView style={{backgroundColor: 'white'}}>
+                <CategoryHeader text={'Парфюмерия'}/>
+            </SafeAreaView>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={styles.scrollView}>
-                <CategoryHeader text={'Парфюмерия'}/>
                 <View style={styles.container}>
                     <View style={styles.description}>
                         <Text style={styles.descriptionText}>
@@ -34,25 +36,34 @@ const CategoryPage = () => {
                         <PodCategoryButton text={'Парфюм 7'}/>
                         <PodCategoryButton text={'Духи'}/>
                     </View>
-
                 </View>
-                <SortingFilter />
-                <Filtering />
+                <SortingFilter/>
+                <Filtering/>
                 <View style={styles.mainBlock}>
-                    <GoodsInCategory route={'ProductPage'} newPrice={1500} firstPrice={2100} description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1700} route={'ProductPage'} firstPrice={2100} description={'Доступен от 5 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1800} firstPrice={2100} route={'ProductPage'} description={'Доступен от 7 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1100} firstPrice={1900} route={'ProductPage'} description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1500} firstPrice={2100} description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1700} firstPrice={2100} description={'Доступен от 5 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1800} firstPrice={2100} description={'Доступен от 7 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
-                    <GoodsInCategory newPrice={1100} firstPrice={1900} description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'  }/>
+                    <GoodsInCategory route={'ProductPage'} newPrice={1500} firstPrice={2100}
+                                     description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1700} route={'ProductPage'} firstPrice={2100}
+                                     description={'Доступен от 5 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1800} firstPrice={2100} route={'ProductPage'}
+                                     description={'Доступен от 7 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1100} firstPrice={1900} route={'ProductPage'}
+                                     description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1500} firstPrice={2100} description={'Доступен от 3 мл'}
+                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1700} firstPrice={2100} description={'Доступен от 5 мл'}
+                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1800} firstPrice={2100} description={'Доступен от 7 мл'}
+                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    <GoodsInCategory newPrice={1100} firstPrice={1900} description={'Доступен от 3 мл'}
+                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
                 </View>
-                <Footer />
+                <View style={{paddingBottom: 100}}>
+                    <Footer/>
+                </View>
             </ScrollView>
-            <View style={styles.footer}>
-                <ButtonsInFooter />
-            </View>
+                <View style={styles.footer}>
+                    <ButtonsInFooter/>
+                </View>
         </View>
     )
 }
@@ -77,7 +88,6 @@ const styles = StyleSheet.create({
         paddingBottom: wp(3.5),
         alignItems: 'center',
         justifyContent: 'center',
-
     },
     descriptionText: {
         textAlign: 'center',
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         left: 0,
         right: 0,
-        paddingBottom: wp(5)
+        padding: Platform.OS==='ios' ? wp(30) : wp(15)
     }
 })
 

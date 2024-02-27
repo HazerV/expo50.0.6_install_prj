@@ -1,10 +1,11 @@
 import React from "react";
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {config} from "../../../../config";
+import {useNavigation} from "@react-navigation/native";
 const NavButtons = ({text, route}) => {
-
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(`${route}`)}>
             <View style={styles.container}>
                 <Text style={styles.textStyle}>
                     {text}

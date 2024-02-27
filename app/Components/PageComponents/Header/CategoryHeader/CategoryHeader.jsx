@@ -5,6 +5,7 @@ import ArrowSvg from "../../../../../assets/icons/GoBack/GoBackBlackJs";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import {useNavigation} from "@react-navigation/native";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 const CategoryHeader = ({text}) => {
     const navigation = useNavigation()
@@ -25,18 +26,18 @@ const CategoryHeader = ({text}) => {
             </TouchableOpacity>
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         alignItems: 'center',
-        paddingTop: wp(12),
+        // paddingTop: wp(12),
         width: wp(100),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: wp(2.5),
+        paddingLeft: wp(2.5),
+        paddingRight: wp(2.5),
         // columnGap: wp(30),
         paddingBottom: 12,
     },

@@ -9,7 +9,9 @@ const BrandsScroll = ({img}) => {
     img = BrandEx
     const navigation = useNavigation()
     return (
-        <View>
+        <View style={{
+            marginLeft: -wp(2.5)
+        }}>
             <View style={styles.align}>
                 <Text style={styles.allBrandsText}>
                     Бренды
@@ -41,6 +43,7 @@ const BrandsScroll = ({img}) => {
 }
 const styles = StyleSheet.create({
     containerBrands: {
+        marginLeft: -200,
         paddingBottom: wp(8),
         justifyContent: 'space-between',
         flexDirection: 'column'
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
         columnGap: wp(3),
         paddingBottom: wp(3),
         flexDirection: 'row',
+        paddingLeft: wp(2.5)
     },
     allBrands: {
         height: wp(10),
@@ -62,11 +66,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
+        paddingRight: wp(2.5)
     },
     allBrandsText: {
         fontSize: config.fontLarge,
         fontFamily: config.familyBold,
         lineHeight: config.lineLarge,
+        paddingLeft: wp(2.5)
+
     }
 })
 

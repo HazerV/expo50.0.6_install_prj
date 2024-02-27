@@ -6,10 +6,10 @@ const FooterInfo = () => {
 
     return (
         <View style={{alignSelf: 'center', justifyContent: 'center' }}>
-            <NavButtons text={'Контакты'} />
-            <NavButtons text={'Оферта'} />
-            <NavButtons text={'Пользовательское соглашение'} />
-            <NavButtons text={'Политика конфиденциальности'} />
+            <NavButtons text={'Контакты'} route={'ContactsPage'} />
+            <NavButtons text={'Оферта'} route={'OfertaPage'}/>
+            <NavButtons text={'Пользовательское соглашение'} route={'TermsUse'} />
+            <NavButtons text={'Политика конфиденциальности'} route={'ConfidencePage'}/>
         </View>
     )
 }

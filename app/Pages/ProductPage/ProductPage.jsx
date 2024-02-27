@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image} from "react-native";
+import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, Platform} from "react-native";
 import {config} from "../../config";
 import HeaderForProduct from "../../Components/PageComponents/Header/HeaderForProduct/HeaderForProduct";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -13,9 +13,11 @@ import ProductNullBlock from "../../Components/PageComponents/ProductPageCompone
 const ProductPage = ({id, count}) => {
     return (
         <View>
+            <SafeAreaView style={{backgroundColor: 'white'}}>
+                <HeaderForProduct/>
+            </SafeAreaView>
             <ScrollView showsVerticalScrollIndicator={false}
                         style={{height: '100%', backgroundColor: 'white'}}>
-                <HeaderForProduct/>
                 <View style={styles.container}>
                     <Text style={styles.nameText}>
                         Pierre Balmain Carbone de Balmain туалетная вода
@@ -146,8 +148,6 @@ const styles = StyleSheet.create({
     },
     textInBlock: {
         flexDirection: 'row',
-        // display: 'flex',
-        // width: '100%',
         alignContent: 'center',
         justifyContent: 'space-between',
         columnGap: wp(1),
@@ -164,12 +164,13 @@ const styles = StyleSheet.create({
         borderLeftColor: 'white',
         borderRightColor: 'white',
         borderBottomColor: '#CCCCCC',
-        width: '100%'
+        flex: 1
     },
     nameOfBrand: {
         fontSize: config.fontMedium,
         lineHeight: config.lineMedium,
         fontFamily: config.familyRegular,
+        paddingRight: wp(2.5)
     },
     footer: {
         position: 'absolute',
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         left: 0,
         right: 0,
-        paddingBottom: wp(5)
+        padding: Platform.OS==='ios' ? wp(30) : wp(15)
     }
 })
 

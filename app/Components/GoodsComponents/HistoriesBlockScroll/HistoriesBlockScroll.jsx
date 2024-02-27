@@ -8,7 +8,9 @@ import {useNavigation} from "@react-navigation/native";
 const HistoriesBlockScroll = () => {
     const navigation = useNavigation()
     return (
-        <View>
+        <View style={{
+            marginLeft: -wp(2.5)
+        }}>
             <View style={styles.align}>
                 <Text style={styles.textCommon}>
                     Истории
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
         paddingBottom: wp(4.1),
         fontFamily: config.familyBold,
         fontSize: config.fontLarge,
-        lineHeight: config.lineLarge
+        lineHeight: config.lineLarge,
+        paddingLeft: wp(2.5)
     },
     align: {
         flexDirection: 'row',
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     commonBlock: {
         columnGap: wp(3.05),
         flexDirection: 'row',
+        paddingLeft: wp(2.5),
         paddingBottom: wp(4.1),
     },
     block: {
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
         columnGap: wp(1.5),
         borderRadius: wp(2),
         justifyContent: 'center',
-        // alignItems: 'center',
+        paddingRight: wp(2.5),
         flexDirection: 'row',
     }
 })

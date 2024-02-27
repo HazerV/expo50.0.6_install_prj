@@ -31,11 +31,13 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         alignItems: 'center',
-        paddingTop: wp(13),
+        // paddingTop: wp(13),
+        paddingLeft: wp(2.5),
+        paddingRight: wp(2.5),
         width: wp(100),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: wp(2.5),
+        // padding: wp(2.5),
         paddingBottom: wp(2.7),
     },
     go_back: {
