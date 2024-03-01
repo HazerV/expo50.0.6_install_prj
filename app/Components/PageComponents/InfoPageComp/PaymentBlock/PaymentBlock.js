@@ -1,6 +1,6 @@
 import React from "react";
 import {View, StyleSheet, Image, Linking, TouchableOpacity} from "react-native";
-import ButtonComponents from "../../../GoodsComponents/ButtonComponent/ButtonComponents";
+import {ButtonComponents} from "../../../GoodsComponents/ButtonComponent/ButtonComponents";
 import Telegram from '../../../../../assets/images/SocNetworks/Telegram.png'
 import WhatsApp from '../../../../../assets/images/SocNetworks/WhatApp.png'
 const PaymentBlock = () => {

@@ -4,9 +4,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from "react-nativ
 import {config} from "../../../config";
 import UnderlineRouteText from "../../GoodsComponents/UnderlineRouteText/UnderlineRouteText";
 import ButtonsInFooter from "./ButtonsInFooter/ButtonsInFooter";
-import ButtonComponents from "../../GoodsComponents/ButtonComponent/ButtonComponents";
+import {ButtonComponents} from "../../GoodsComponents/ButtonComponent/ButtonComponents";
 const Footer = () => {
-
     return (
         <View style={styles.container}>
             <View style={{
@@ -30,9 +29,6 @@ const Footer = () => {
                     © 2023 – 2024. «Полфлакона». Все права защищены.
                 </Text>
             </View>
-            {/*<View style={{alignSelf: 'center', paddingTop: wp(5)}}>*/}
-            {/*    <ButtonsInFooter />*/}
-            {/*</View>*/}
         </View>
     )
 

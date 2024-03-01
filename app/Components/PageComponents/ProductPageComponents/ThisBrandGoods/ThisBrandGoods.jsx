@@ -23,7 +23,6 @@ const ThisBrandGoods = () => {
                     <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
                                            name={'Духи AMOUAGE Beach Hut (на распив)'}/>
                 </View>
-
             </ScrollView>
         </View>
     )

@@ -19,7 +19,7 @@ const ButtonsInFooter = () => {
             <TouchableOpacity onPress={() => navigation.navigate('InfoPage')}>
                 <MenuSvg/>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('ProfilePage')}>
                 <AccountSvg/>
             </TouchableOpacity>
         </View>

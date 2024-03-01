@@ -11,10 +11,10 @@ import SimilarGoods from "../../Components/PageComponents/ProductPageComponents/
 import Footer from "../../Components/PageComponents/Footer/Footer";
 import ProductNullBlock from "../../Components/PageComponents/ProductPageComponents/ProductNullBlock/ProductNullBlock";
 import SliderProduct from "../../Components/PageComponents/ProductPageComponents/SliderProduct/SliderProduct";
-const ProductPage = ({id, count}) => {
+const ProductPage = ({count}) => {
     return (
         <View>
-            <SafeAreaView style={{backgroundColor: 'white'}}>
+            <SafeAreaView style={{backgroundColor: 'white', paddingTop: wp(2)}}>
                 <HeaderForProduct/>
             </SafeAreaView>
             <ScrollView showsVerticalScrollIndicator={false}

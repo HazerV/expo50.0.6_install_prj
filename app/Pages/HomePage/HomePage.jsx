@@ -16,11 +16,11 @@ import TopSellsGoods from "../../Components/GoodsComponents/TopSellsGoods/TopSel
 import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSlider";
 
 const HomePage = () => {
-    const {theme} = useContext(ThemeContext)
+    // const {theme} = useContext(ThemeContext)
     return (
         <View>
             <ScrollView
-                showsVerticalScrollIndicator={false}>
+                showsVerticalScrollIndicator={false} >
                 <Header city={'Москва'}/>
                 <View style={styles.container}>
                     <View style={styles.mainBlock}>

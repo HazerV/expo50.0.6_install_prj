@@ -10,11 +10,14 @@ import Filtering from "../../Components/PageComponents/CategoryPageComponents/Fi
 import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/GoodsInCategory";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
 import FooterInfo from "../../Components/PageComponents/InfoPageComp/FooterInfo/FooterInfo";
-import SortingFilter from "../../Components/GoodsComponents/FilterComponents/SortingFilter/SortingFilter";
+import SortingFilter from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
 const CategoryPage = () => {
     return (
         <View>
-            <SafeAreaView style={{backgroundColor: 'white'}}>
+            <SafeAreaView
+                style={{
+                    paddingTop: wp(2),
+                    backgroundColor: 'white'}}>
                 <CategoryHeader text={'Парфюмерия'}/>
             </SafeAreaView>
             <ScrollView

@@ -11,6 +11,10 @@ import BrandsPage from "../Pages/BrandsPage/BrandsPage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import SelectedBrandPage from "../Pages/SelectedBrandPage/SelectedBrandPage";
 import ContactsPage from "../Pages/ContactsPage/ContactsPage";
+import ProfilePage from "../Pages/ProfilePages/ProfilePage/ProfilePage";
+import RegisterPage from "../Pages/ProfilePages/RegisterPage/RegisterPage";
+import RecoverPasswordPage from "../Pages/ProfilePages/RecoverPasswordPage/RecoverPasswordPage";
+import AdressPage from "../Pages/ProfilePages/AdressPage/AdressPage";
 const Stack = createNativeStackNavigator()
 const Navigation = () => {
 
@@ -34,7 +38,7 @@ const Navigation = () => {
                 }} />
                 <Stack.Screen name='ProductPage' component={ProductPage} options={{
                     headerShown: false,
-                    navigationBarHidden: true
+                    navigationBarHidden: true,
                 }} />
                 <Stack.Screen name='CategoryPage' component={CategoryPage} options={{
                     headerShown: false,
@@ -51,6 +55,25 @@ const Navigation = () => {
                 <Stack.Screen name='ContactsPage' component={ContactsPage} options={{
                     headerShown: false,
                     navigationBarHidden: true
+                }}  />
+                <Stack.Screen name='ProfilePage' component={ProfilePage} options={{
+                    headerShown: false,
+                    navigationBarHidden: true
+                }}  />
+                <Stack.Screen name='RegisterPage' component={RegisterPage} options={{
+                    headerShown: false,
+                    navigationBarHidden: true,
+                    stackAnimation: 'none'
+                }}  />
+                <Stack.Screen name='RecoverPasswordPage' component={RecoverPasswordPage} options={{
+                    headerShown: false,
+                    navigationBarHidden: true,
+                    stackAnimation: 'none'
+                }}  />
+                <Stack.Screen name='AdressPage' component={AdressPage} options={{
+                    headerShown: false,
+                    navigationBarHidden: true,
+                    stackAnimation: 'none'
                 }}  />
             </Stack.Navigator>
         </NavigationContainer>

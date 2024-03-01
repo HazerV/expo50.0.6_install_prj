@@ -3,7 +3,7 @@ import HeaderSvg from '../../../../assets/icons/HeaderIcons/HeaderJs'
 import SearchSvg from '../../../../assets/icons/HeaderIcons/SearchJs'
 import NavigationSvg from '../../../../assets/icons/HeaderIcons/NavigationJs'
 import {config} from "../../../config";
-import ButtonComponents from "../../GoodsComponents/ButtonComponent/ButtonComponents";
+import {ButtonComponents} from "../../GoodsComponents/ButtonComponent/ButtonComponents";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {View, TouchableOpacity, Text, StyleSheet} from "react-native";
 import {ThemeContext} from "../../../context/Context";

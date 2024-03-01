@@ -1,10 +1,11 @@
 import React from "react";
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {config} from "../../../config";
+import {useNavigation} from "@react-navigation/native";
 const UnderlineRouteText = ({text, route}) => {
-
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(`${route}`)}>
             <Text style={styles.textStyle}>
                 {text}
             </Text>
@@ -17,7 +18,8 @@ const styles = StyleSheet.create({
         fontSize: config.fontMedium,
         fontFamily: config.familyRegular,
         lineHeight: config.lineMedium,
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        textAlign: 'center'
     }
 })
 
