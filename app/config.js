@@ -10,5 +10,4 @@ export const config = {
     accentColor: '#593780',
     accentLightColor: '#C574CC',
     backgroundIcons: '#F5F5F5',
-
 }

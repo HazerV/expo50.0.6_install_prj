@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         left: 0,
         right: 0,
-        padding: Platform.OS==='ios' ? wp(30) : wp(15)
+        padding: Platform.OS==='ios' ? wp(30) : wp(20)
     }
 })
 

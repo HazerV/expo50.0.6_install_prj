@@ -1,0 +1,13 @@
+- HomePage
+- CategoryPage (+sliders)
+- ProductPage (+sliders)
+- Half BrandsPage
+- Info page (+links map)
+- ProfilePage
+- SearchPage (Open)
+ -- SignInPage
+  --- ProfilePage (open)
+  --- AdressesPage (half)
+ -- RegistrationPage
+ -- ResetPasswordPage
+

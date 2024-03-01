@@ -19,7 +19,7 @@ const ProfilePage = () => {
     const {currentForm, setCurrentForm} = useContext(AuthContext)
     console.log(currentForm)
     function HandleState() {
-        if (currentForm ===0 ) {
+        if (currentForm === 0 ) {
             return (
                 <View style={{alignItems: 'center'}}>
                     <LoginFirstForm/>
