@@ -15,8 +15,6 @@ const Context = ({children}) => {
     const page_ctx = {route, setRoute}
     const theme_ctx = {theme, setTheme}
     const val_ctx = {value, setValue}
-    console.log(route)
-    console.log(theme)
     return (
         <PageContext.Provider value={page_ctx}>
             <ThemeContext.Provider value={theme_ctx}>

@@ -1,3 +1,4 @@
+2v
 - HomePage
 - CategoryPage (+sliders)
 - ProductPage (+sliders)
@@ -6,8 +7,8 @@
 - ProfilePage
 - SearchPage (Open)
  -- SignInPage
-  --- ProfilePage (open)
-  --- AdressesPage (half)
+  --- ProfilePage (full without email confirm)
+  --- AddressesPage (full)
  -- RegistrationPage
  -- ResetPasswordPage
 

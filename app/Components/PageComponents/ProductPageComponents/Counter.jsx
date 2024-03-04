@@ -9,9 +9,6 @@ import {config} from "../../../config";
 const Counter = ({id, value}) => {
 
     const [count, setCount] = useState(0)
-    // const count = 5
-    console.log(count)
-
     if (count === 0) {
         return (
             <TouchableOpacity onPress={() => setCount(count + 1)}>

@@ -6,7 +6,7 @@ import {config} from "../../../../config";
 import {CustomerAddContext} from "../../../../context/CustomersContext";
 
 function EditButton() {
-    const {customer, setCustomer} = React.useContext(CustomerAddContext)
+    const {setCustomer} = React.useContext(CustomerAddContext)
     return (
         <TouchableOpacity onPress={() => setCustomer(0)}>
             <View style={styles.container}>

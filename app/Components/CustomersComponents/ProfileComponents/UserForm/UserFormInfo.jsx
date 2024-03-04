@@ -4,7 +4,6 @@ import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 
 function UserFormInfo({name, email, phone_number}) {
-
     return (
         <View style={styles.container}>
             <Text style={styles.name_Text}>

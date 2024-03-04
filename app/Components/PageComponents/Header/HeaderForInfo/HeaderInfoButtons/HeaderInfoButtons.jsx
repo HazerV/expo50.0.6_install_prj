@@ -13,7 +13,6 @@ function GoBack() {
     return (
         <TouchableOpacity onPress={() => {
             navigation.navigate('HomePage')
-            console.log('Tap')
         }}>
             <View style={styles.container}>
                 <ArrowSvg/>

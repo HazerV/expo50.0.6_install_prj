@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import {View, Text, StyleSheet, ScrollView, Platform, TouchableOpacity} from "react-native";
+import React from "react";
+import {View, Text, StyleSheet, ScrollView, TouchableOpacity} from "react-native";
 import ProfileHeader from "../../../Components/PageComponents/Header/ProfileHeader/ProfileHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import LoginFirstForm from "../../../Components/PageComponents/ProfilePageComponents/LoginFirstForm/LoginFirstForm";
@@ -15,9 +15,8 @@ import ExitButton from "../../../Components/CustomersComponents/ProfileComponent
 import EditCustomerForm from "../../../Components/CustomersComponents/ProfileComponents/EditCustomer/EditCustomerForm";
 const ProfilePage = () => {
     const navigation = useNavigation()
-    const {currentForm, setCurrentForm} = React.useContext(AuthContext)
-    const {customer, setCustomer} = React.useContext(CustomerAddContext)
-    console.log(currentForm)
+    const {currentForm} = React.useContext(AuthContext)
+    const {customer} = React.useContext(CustomerAddContext)
     const DefaultUserTab = () => {
         return (
             <View style={{rowGap: wp(3)}}>
