@@ -1,11 +1,13 @@
+import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {config} from "../../../../config";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {useNavigation} from "@react-navigation/native";
+import {AddressContext} from "../../../../context/AddressContext";
 function AddAdressButton() {
-    const navigation = useNavigation()
+    const {selected, setSelected} = React.useContext(AddressContext)
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setSelected('newAddress')}>
             <View style={styles.container}>
                 <Text style={styles.text}>
                     Добавить адрес

@@ -4,7 +4,9 @@ import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import RegistrationForm from "../../../Components/PageComponents/ProfilePageComponents/LoginFirstForm/RegistrationForm";
 import {ButtonComponents} from "../../../Components/GoodsComponents/ButtonComponent/ButtonComponents";
 import ProfileHeader from "../../../Components/PageComponents/Header/ProfileHeader/ProfileHeader";
+import {AuthContext} from "../../../context/Context";
 const RegisterPage = () => {
+    const {setCurrentForm} = React.useContext(AuthContext)
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>

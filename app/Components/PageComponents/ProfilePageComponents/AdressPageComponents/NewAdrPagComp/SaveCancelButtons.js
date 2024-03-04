@@ -1,10 +1,9 @@
 import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {config} from "../../../../../config";
-import {useNavigation} from "@react-navigation/native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {AddressContext} from "../../../../../context/AddressContext";
 function SaveButton() {
-    const navigation = useNavigation()
     const dynSt = {
         bgColor: config.accentColor,
         color: 'white'
@@ -18,13 +17,13 @@ function SaveButton() {
     )
 }
 function CancelButton() {
-    const navigation = useNavigation()
     const dynSt = {
         bgColor: config.backgroundIcons,
         color: 'black'
     }
+    const {setSelected} = React.useContext(AddressContext)
     return (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => setSelected('myAddress')}>
             <View style={[styles.container, {backgroundColor: dynSt.bgColor}]}>
                 <Text style={[styles.textInsideButton, {color: dynSt.color}]}>
                     Отменить

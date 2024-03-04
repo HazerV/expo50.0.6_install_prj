@@ -1,23 +1,32 @@
 import React, {useContext, useState} from "react";
 import {View, Text, StyleSheet, ScrollView, Platform, TouchableOpacity} from "react-native";
-import {SafeAreaView} from "react-native-safe-area-context";
 import ProfileHeader from "../../../Components/PageComponents/Header/ProfileHeader/ProfileHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import LoginFirstForm from "../../../Components/PageComponents/ProfilePageComponents/LoginFirstForm/LoginFirstForm";
-import {ButtonComponents} from "../../../Components/GoodsComponents/ButtonComponent/ButtonComponents";
-import RegistrationForm from "../../../Components/PageComponents/ProfilePageComponents/LoginFirstForm/RegistrationForm";
 import ButtonsInFooter from "../../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
 import {AuthContext} from "../../../context/Context";
-import {useNavigation, useRoute} from "@react-navigation/native";
+import {CustomerAddContext} from "../../../context/CustomersContext";
+import {useNavigation} from "@react-navigation/native";
 import SignInButtons from "../../../Components/PageComponents/ProfilePageComponents/ButtonsProfile/SignInButtons/SignInButtons";
 import UnderHeaderSigns from "../../../Components/PageComponents/ProfilePageComponents/ProfilePageComponents/UnderHeaderSigns/UnderHeaderSigns";
-import ButtonInProfile
-    from "../../../Components/PageComponents/ProfilePageComponents/ProfilePageComponents/UnderHeaderSigns/ButtonInProfile";
-import {config} from "../../../config";
+import UserForm from "../../../Components/CustomersComponents/ProfileComponents/UserForm/UserForm";
+import ActiveOrdersForm from "../../../Components/CustomersComponents/ProfileComponents/ActiveOrdersForm/ActiveOrdersForm";
+import ExitButton from "../../../Components/CustomersComponents/ProfileComponents/ExitButton/ExitButton";
+import EditCustomerForm from "../../../Components/CustomersComponents/ProfileComponents/EditCustomer/EditCustomerForm";
 const ProfilePage = () => {
     const navigation = useNavigation()
-    const {currentForm, setCurrentForm} = useContext(AuthContext)
+    const {currentForm, setCurrentForm} = React.useContext(AuthContext)
+    const {customer, setCustomer} = React.useContext(CustomerAddContext)
     console.log(currentForm)
+    const DefaultUserTab = () => {
+        return (
+            <View style={{rowGap: wp(3)}}>
+                <UserForm />
+                <ActiveOrdersForm />
+                <ExitButton />
+            </View>
+        )
+    }
     function HandleState() {
         if (currentForm === 0 ) {
             return (
@@ -38,6 +47,10 @@ const ProfilePage = () => {
             return (
                 <View>
                     <UnderHeaderSigns />
+                    <View style={[styles.container, {rowGap: wp(3)}]}>
+                        {customer === 1 && <DefaultUserTab/>}
+                        {customer === 0 && <EditCustomerForm/>}
+                    </View>
                 </View>
             )
         }
@@ -63,10 +76,8 @@ const styles = StyleSheet.create({
     },
     container: {
         paddingLeft: wp(2.5),
-        paddingBottom: wp(35),
         justifyContent: 'center',
-        // alignItems: 'center',
-        // paddingTop: wp(2),
+        alignItems: 'center',
     },
     buttons: {
         justifyContent: 'center',

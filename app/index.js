@@ -8,6 +8,8 @@ import NavigationContainer from "expo-router/build/fork/NavigationContainer.nati
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 import HomePage from "./Pages/HomePage/HomePage";
 import InfoPage from "./Pages/InfoPage/InfoPage";
+import {NewAddressContexts} from "./context/AddressContext";
+import {NewCustomersContext} from "./context/CustomersContext";
 
 const Stack = createNativeStackNavigator()
 export default function Page() {
@@ -47,7 +49,11 @@ export default function Page() {
 
     return (
         <Context>
-            <Navigation />
+            <NewAddressContexts>
+                <NewCustomersContext>
+                    <Navigation/>
+                </NewCustomersContext>
+            </NewAddressContexts>
         </Context>
     )
 }

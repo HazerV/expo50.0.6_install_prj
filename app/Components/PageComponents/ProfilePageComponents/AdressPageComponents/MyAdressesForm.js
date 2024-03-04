@@ -1,25 +1,22 @@
 import {Text, View, StyleSheet} from "react-native";
 import AdressForm from "./AdressForm";
 import AddAdressButton from "./AddAdressButton";
-import AddAdressForm from "./NewAdrPagComp/AddAdressForm";
 import React from "react";
-import {config} from "../../../../config";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
-
+import {config} from "../../../../config";
 function MyAdressesForm () {
     return (
-        <View>
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text style={styles.textHead}>
                 Мои адреса
             </Text>
-            <View>
-                <AdressForm name={'Офис'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис 3'}/>
-                <AdressForm name={'Офис'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис 3'}/>
-                <AdressForm name={'Офис'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис 3'}/>
+            <View style={{alignItems: 'center'}}>
+                <AdressForm name={'Офис'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис 3г. Оренбург, ул. Салмышская, д. 58/2, офис 3г. Оренбург, ул. Салмышская, д. 58/2, офис 3г. Оренбург, ул. Салмышская, д. 58/2, офис 3г. Оренбург, ул. Салмышская, д. 58/2, офис 3'}/>
+                <AdressForm name={'Офис1'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис г. Оренбург, ул. Салмышская, д. 58/2, офис 33'}/>
+                <AdressForm name={'Офис2'} text={'г. Оренбург, ул. Салмышская, д. 58/2, офис 3'}/>
                 <View style={{alignSelf: 'flex-start'}}>
                     <AddAdressButton/>
                 </View>
-                <AddAdressForm/>
             </View>
         </View>
     )
