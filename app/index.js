@@ -10,6 +10,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import InfoPage from "./Pages/InfoPage/InfoPage";
 import {NewAddressContexts} from "./context/AddressContext";
 import {NewCustomersContext} from "./context/CustomersContext";
+import {HomePageContext} from "./context/HomePageContext";
 
 const Stack = createNativeStackNavigator()
 export default function Page() {
@@ -22,7 +23,6 @@ export default function Page() {
             'Gilroy-SemiBold': require('../assets/fonts/Gilroy-Semibold.ttf')
         }))
     }
-
     async function prepare() {
         try {
             useFonts()
@@ -33,11 +33,9 @@ export default function Page() {
             setIsReady(true)
         }
     }
-
     useEffect(() => {
         prepare()
     }, []);
-
     const onLayoutRootView = useCallback(async () => {
         if (isReady) {
             await SplashScreen.hideAsync()
@@ -51,7 +49,9 @@ export default function Page() {
         <Context>
             <NewAddressContexts>
                 <NewCustomersContext>
-                    <Navigation/>
+                    <HomePageContext>
+                        <Navigation/>
+                    </HomePageContext>
                 </NewCustomersContext>
             </NewAddressContexts>
         </Context>

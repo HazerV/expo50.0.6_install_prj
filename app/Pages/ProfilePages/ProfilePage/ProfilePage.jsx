@@ -7,12 +7,17 @@ import ButtonsInFooter from "../../../Components/PageComponents/Footer/ButtonsIn
 import {AuthContext} from "../../../context/Context";
 import {CustomerAddContext} from "../../../context/CustomersContext";
 import {useNavigation} from "@react-navigation/native";
-import SignInButtons from "../../../Components/PageComponents/ProfilePageComponents/ButtonsProfile/SignInButtons/SignInButtons";
-import UnderHeaderSigns from "../../../Components/PageComponents/ProfilePageComponents/ProfilePageComponents/UnderHeaderSigns/UnderHeaderSigns";
+import SignInButtons
+    from "../../../Components/PageComponents/ProfilePageComponents/ButtonsProfile/SignInButtons/SignInButtons";
+import UnderHeaderSigns
+    from "../../../Components/PageComponents/ProfilePageComponents/ProfilePageComponents/UnderHeaderSigns/UnderHeaderSigns";
 import UserForm from "../../../Components/CustomersComponents/ProfileComponents/UserForm/UserForm";
-import ActiveOrdersForm from "../../../Components/CustomersComponents/ProfileComponents/ActiveOrdersForm/ActiveOrdersForm";
+import ActiveOrdersForm
+    from "../../../Components/CustomersComponents/ProfileComponents/ActiveOrdersForm/ActiveOrdersForm";
 import ExitButton from "../../../Components/CustomersComponents/ProfileComponents/ExitButton/ExitButton";
 import EditCustomerForm from "../../../Components/CustomersComponents/ProfileComponents/EditCustomer/EditCustomerForm";
+import HideWithKeyboard from "react-native-hide-with-keyboard";
+
 const ProfilePage = () => {
     const navigation = useNavigation()
     const {currentForm} = React.useContext(AuthContext)
@@ -20,14 +25,15 @@ const ProfilePage = () => {
     const DefaultUserTab = () => {
         return (
             <View style={{rowGap: wp(3)}}>
-                <UserForm />
-                <ActiveOrdersForm />
-                <ExitButton />
+                <UserForm/>
+                <ActiveOrdersForm/>
+                <ExitButton/>
             </View>
         )
     }
+
     function HandleState() {
-        if (currentForm === 0 ) {
+        if (currentForm === 0) {
             return (
                 <View style={{alignItems: 'center'}}>
                     <LoginFirstForm/>
@@ -42,10 +48,10 @@ const ProfilePage = () => {
                 </View>
             )
         }
-        if (currentForm===1) {
+        if (currentForm === 1) {
             return (
                 <View>
-                    <UnderHeaderSigns />
+                    <UnderHeaderSigns/>
                     <View style={[styles.container, {rowGap: wp(3)}]}>
                         {customer === 1 && <DefaultUserTab/>}
                         {customer === 0 && <EditCustomerForm/>}
@@ -54,17 +60,20 @@ const ProfilePage = () => {
             )
         }
     }
+
     return (
         <View>
             <ScrollView style={styles.scrollView}>
                 <ProfileHeader/>
                 <View>
-                    <HandleState />
+                    <HandleState/>
                 </View>
             </ScrollView>
-            <View style={styles.footer}>
-                <ButtonsInFooter/>
-            </View>
+            <HideWithKeyboard>
+                <View style={styles.footer}>
+                    <ButtonsInFooter/>
+                </View>
+            </HideWithKeyboard>
         </View>
     )
 }

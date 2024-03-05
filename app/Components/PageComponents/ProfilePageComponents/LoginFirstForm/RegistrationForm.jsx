@@ -29,7 +29,7 @@ const RegistrationForm = () => {
                     <TextInput style={styles.inputFormsBlock}/>
                 </View>
                 <View style={{paddingBottom: wp(4)}}>
-                    <Text style={styles.textTop}>Подтвердите пароль</Text>
+                    <Text style={styles.textTop}>Подтвердите пароль</Text>ч
                     <TextInput style={styles.inputFormsBlock}/>
                 </View>
             </View>

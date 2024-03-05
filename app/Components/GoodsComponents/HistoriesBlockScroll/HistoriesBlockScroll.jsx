@@ -43,10 +43,10 @@ const HistoriesBlockScroll = () => {
 const styles = StyleSheet.create({
     textCommon: {
         paddingBottom: wp(4.1),
+        paddingLeft: wp(2.5),
         fontFamily: config.familyBold,
         fontSize: config.fontLarge,
-        lineHeight: config.lineLarge,
-        paddingLeft: wp(2.5)
+        lineHeight: config.lineLarge
     },
     align: {
         flexDirection: 'row',
@@ -54,24 +54,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     allArrow: {
-        flexDirection: 'row',
         columnGap: wp(1.5),
+        right: wp(0.5),
+        flexDirection: 'row',
         position: 'absolute',
         alignContent: 'center',
-        right: wp(0.5),
     },
     commonBlock: {
         columnGap: wp(3.05),
-        flexDirection: 'row',
         paddingLeft: wp(2.5),
         paddingBottom: wp(4.1),
+        flexDirection: 'row',
     },
     block: {
         height: wp(10),
         columnGap: wp(1.5),
         borderRadius: wp(2),
-        justifyContent: 'center',
         paddingRight: wp(2.5),
+        justifyContent: 'center',
         flexDirection: 'row',
     }
 })

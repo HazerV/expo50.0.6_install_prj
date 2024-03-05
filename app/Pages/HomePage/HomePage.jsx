@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {
     View,
     ScrollView,
@@ -14,9 +14,23 @@ import HistoriesBlockScroll from "../../Components/GoodsComponents/HistoriesBloc
 import CategoriesBlock from "../../Components/GoodsComponents/CategoriesBlock/CategoriesBlock";
 import TopSellsGoods from "../../Components/GoodsComponents/TopSellsGoods/TopSellsGoods";
 import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSlider";
+import {getBanners, getMesh} from "../../api/banners";
+import {HomeContext} from "../../context/HomePageContext";
+import {getCategories} from "../../api/categories";
 
 const HomePage = () => {
-    // const {theme} = useContext(ThemeContext)
+
+    const {Banner, SetBanner} = React.useContext(HomeContext)
+    const getBanner = () => {
+        getMesh()
+            .then((res) => {
+            SetBanner(res)
+        })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    console.log(Banner)
     return (
         <View>
             <ScrollView
@@ -24,7 +38,7 @@ const HomePage = () => {
                 <Header city={'Москва'}/>
                 <View style={styles.container}>
                     <View style={styles.mainBlock}>
-                        <BannerSlider/>
+                        <BannerSlider img={{}}/>
                         <HistoriesBlockScroll/>
                         <BrandsScroll/>
                         <CategoriesBlock/>
