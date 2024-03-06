@@ -1,14 +1,17 @@
 import React from "react";
 import {View, StyleSheet, Image, ScrollView} from "react-native";
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-const BannerSlider = ({img}) => {
+import SliderBox from '/home/vova/WebstormProjects/Polflakona/app/Pages/HomePage/SliderBox.png'
+const BannerSlider = ({key, img}) => {
     return (
         <View style={styles.sliderBox}>
             <ScrollView snapToInterval={wp(100)} horizontal={true} showsHorizontalScrollIndicator={false}>
                 <View style={styles.block}>
                     <Image
                         style={styles.imageInSlider}
-                        source={{uri: `${img}`}}/>
+                        source={SliderBox}
+                        // source={{uri: `${img}`}}
+                    />
                 </View>
             </ScrollView>
         </View>

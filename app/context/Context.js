@@ -10,7 +10,7 @@ const Context = ({children}) => {
     const [theme, setTheme] = useState('light')
     const [value, setValue] = useState(0)
     const [route, setRoute] = useState('HomePage')
-
+    console.log(route)
     const profile_ctx = {currentForm, setCurrentForm}
     const page_ctx = {route, setRoute}
     const theme_ctx = {theme, setTheme}

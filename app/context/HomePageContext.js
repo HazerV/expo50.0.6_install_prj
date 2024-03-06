@@ -1,5 +1,5 @@
 import React from "react";
-const HomeContext = React.createContext([])
+const HomeContext = React.createContext()
 
 function HomePageContext ({children}) {
     const [Banners, SetBanners] = React.useState([])

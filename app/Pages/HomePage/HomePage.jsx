@@ -17,20 +17,9 @@ import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSl
 import {getBanners, getMesh} from "../../api/banners";
 import {HomeContext} from "../../context/HomePageContext";
 import {getCategories} from "../../api/categories";
-
+import axios from "../../api/axios";
 const HomePage = () => {
 
-    const {Banner, SetBanner} = React.useContext(HomeContext)
-    const getBanner = () => {
-        getMesh()
-            .then((res) => {
-            SetBanner(res)
-        })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-    console.log(Banner)
     return (
         <View>
             <ScrollView
@@ -38,10 +27,10 @@ const HomePage = () => {
                 <Header city={'Москва'}/>
                 <View style={styles.container}>
                     <View style={styles.mainBlock}>
-                        <BannerSlider img={{}}/>
+                        <BannerSlider/>
                         <HistoriesBlockScroll/>
                         <BrandsScroll/>
-                        <CategoriesBlock/>
+                        <CategoriesBlock />
                         <TopSellsGoods/>
                     </View>
                     <Footer/>
