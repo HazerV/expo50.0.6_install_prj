@@ -57,7 +57,7 @@ const BrandsScroll = ({img}) => {
 }
 const styles = StyleSheet.create({
     containerBrands: {
-        marginLeft: -200,
+        // marginLeft: -wp(2.5),
         paddingBottom: wp(8),
         justifyContent: 'space-between',
         flexDirection: 'column'

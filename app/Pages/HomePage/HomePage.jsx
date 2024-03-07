@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import {
     View,
     ScrollView,
@@ -7,30 +7,31 @@ import {
 import Header from "../../Components/PageComponents/Header/Header";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Footer from "../../Components/PageComponents/Footer/Footer";
-import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
-import {ThemeContext} from "../../context/Context";
 import BrandsScroll from "../../Components/GoodsComponents/BrandsScroll/BrandsScroll";
+import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
 import HistoriesBlockScroll from "../../Components/GoodsComponents/HistoriesBlockScroll/HistoriesBlockScroll";
 import CategoriesBlock from "../../Components/GoodsComponents/CategoriesBlock/CategoriesBlock";
 import TopSellsGoods from "../../Components/GoodsComponents/TopSellsGoods/TopSellsGoods";
 import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSlider";
 import {getBanners, getMesh} from "../../api/banners";
+import {ThemeContext} from "../../context/Context";
 import {HomeContext} from "../../context/HomePageContext";
 import {getCategories} from "../../api/categories";
 import axios from "../../api/axios";
-const HomePage = () => {
 
+const HomePage = () => {
     return (
         <View>
             <ScrollView
-                showsVerticalScrollIndicator={false} >
+                bounces={false}
+                showsVerticalScrollIndicator={false}>
                 <Header city={'Москва'}/>
                 <View style={styles.container}>
                     <View style={styles.mainBlock}>
                         <BannerSlider/>
-                        <HistoriesBlockScroll/>
+                        {/*<HistoriesBlockScroll/>*/}
                         <BrandsScroll/>
-                        <CategoriesBlock />
+                        <CategoriesBlock/>
                         <TopSellsGoods/>
                     </View>
                     <Footer/>

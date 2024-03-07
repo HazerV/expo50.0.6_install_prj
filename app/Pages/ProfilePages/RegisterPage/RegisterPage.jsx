@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingBottom: wp(10)
     }
 })
 export default RegisterPage

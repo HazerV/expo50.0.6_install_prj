@@ -1,4 +1,4 @@
-2v
+3v
 - HomePage
 - CategoryPage (+sliders)
 - ProductPage (+sliders)
@@ -12,3 +12,5 @@
  -- RegistrationPage
  -- ResetPasswordPage
 
+    - added axios into HomePage
+        -- categories && brand_scroll

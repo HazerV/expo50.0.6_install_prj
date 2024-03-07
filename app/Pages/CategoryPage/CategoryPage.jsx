@@ -20,7 +20,7 @@ const CategoryPage = () => {
                     backgroundColor: 'white'}}>
                 <CategoryHeader text={'Парфюмерия'}/>
             </SafeAreaView>
-            <ScrollView
+            <ScrollView bounces={false}
                 showsVerticalScrollIndicator={false}
                 style={styles.scrollView}>
                 <View style={styles.container}>
