@@ -6,7 +6,7 @@ import {config} from "../../../config";
 
 const TopSellsGoods = () => {
     return (
-        <View>
+        <View style={{marginLeft: -wp(2.5)}}>
             <Text style={styles.textCommon}>
                 Лидер продаж
             </Text>
@@ -37,6 +37,7 @@ const TopSellsGoods = () => {
 const styles = StyleSheet.create({
     textCommon: {
         paddingBottom: wp(4.1),
+        paddingLeft: wp(2.5),
         fontFamily: config.familyBold,
         fontSize: config.fontLarge,
         lineHeight: config.lineLarge
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
         columnGap: wp(3.05),
         flexDirection: 'row',
         paddingBottom: wp(4.1),
+        paddingLeft: wp(2.5)
     }
 })
 export default TopSellsGoods

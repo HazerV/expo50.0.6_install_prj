@@ -1,119 +1,136 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import ButtonAccentColor from "../ButtonsProfile/ButtonAccentColor/ButtonAccentColor";
 import UnderlineRouteText from "../../../GoodsComponents/UnderlineRouteText/UnderlineRouteText";
-
-class RegistrationForm extends Component {
-    state = {
-        name: '',
-        lastname: '',
-        middlename: '',
-        number: '',
-        email: '',
-        password: '',
-        checkPassword: ''
-    };
-    handleName = (text) => {
-        this.setState({name: text})
-    };
-    handleLastname = (text) => {
-        this.setState({lastname: text})
-    };
-    handleMiddlename = (text) => {
-        this.setState({middlename: text})
-    };
-    handleNumber = (text) => {
-        this.setState({number: text})
-    };
-    handleEmail = (text) => {
-        this.setState({email: text})
-    };
-    handlePassword = (text) => {
-        this.setState({password: text})
-    };
-    handleCheckPassword = (text) => {
-        this.setState({checkPassword: text})
-    };
-    checkLogin = (name, password, number) => {
-        alert(name + ' ' + password + ' ' + number)
-    };
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.textHead}>
-                    Регистрация
-                </Text>
-                <View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Имя</Text>
-                        <TextInput
-                            onChangeText={this.handleName}
-                            accessibilityLabel={'name'}
-                            autoComplete={'name'}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Фамилия</Text>
-                        <TextInput
-                            onChangeText={this.handleLastname}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Отчество</Text>
-                        <TextInput
-                            onChangeText={this.handleMiddlename}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Телефон</Text>
-                        <TextInput
-                            onChangeText={this.handleNumber}
-                            keyboardType={'number-pad'}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Email</Text>
-                        <TextInput
-                            onChangeText={this.handleEmail}
-                            keyboardType={'email-address'}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Пароль</Text>
-                        <TextInput
-                            onChangeText={this.handlePassword}
-                            secureTextEntry={true}
-                            style={styles.inputFormsBlock}/>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.textTop}>Подтвердите пароль</Text>
-                        <TextInput
-                            onChangeText={this.handleCheckPassword}
-                            secureTextEntry={true}
-                            style={styles.inputFormsBlock}/>
-                    </View>
+import {signUp} from "../../../../api/auth";
+import {signUpSchema} from "../../../../shemas";
+import * as Yup from 'yup'
+function RegistrationForm() {
+    const [name, setName] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [middlename, setMiddlename] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [success, setSuccess] = useState(false)
+    const [errors, setErrors] = useState({})
+    useEffect(() => {
+        signUp()
+            .then(res => console.log(res))
+    }, []);
+    const trySignUp = async () => {
+        try {
+            await signUpSchema.validate({name, lastname, middlename, phone, email, password, passwordConfirm}, {abortEarly: false})
+            setErrors({})
+            setSuccess(true)
+            if (success===true) {
+                    await signUp(
+                        {
+                            name: name,
+                            lastname: lastname,
+                            middlename: middlename,
+                            phone: phone,
+                            email: email,
+                            password: password
+                        })
+                        .then(res => console.log(res.data))
+                }
+        } catch (err) {
+            setSuccess(false)
+            if (err instanceof Yup.ValidationError) {
+                const yupErrors = {}
+                err.inner.forEach((innerError) => {
+                    yupErrors[innerError.path] = innerError.message
+                })
+                setErrors(yupErrors)
+            }
+        }
+    }
+    console.log(success)
+    return (
+        <View style={styles.container}>
+            <Text style={styles.textHead}>
+                Регистрация
+            </Text>
+            <View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Имя</Text>
+                    <TextInput
+                        value={name}
+                        onChangeText={setName}
+                        accessibilityLabel={'name'}
+                        autoComplete={'name'}
+                        style={styles.inputFormsBlock}/>
+                    {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
                 </View>
-                <View style={{alignItems: 'center', flexDirection: 'column', rowGap: wp(4)}}>
-                    <TouchableOpacity onPress={() => {
-                        this.checkLogin(this.state.name, this.state.password, this.state.number)
-                    }}>
-                        <ButtonAccentColor text={'Зарегистрироваться'}/>
-                    </TouchableOpacity>
-                    <Text style={styles.textAccept}>
-                        Нажимая на кнопку «Зарегистрироваться» Вы принимаете условия
-                    </Text>
-                    <UnderlineRouteText text={'Согласия на обработку персональных данных'} route={'HomePage'}/>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Фамилия</Text>
+                    <TextInput
+                        value={lastname}
+                        onChangeText={setLastname}
+                        style={styles.inputFormsBlock}/>
+                    {errors.lastname && <Text style={styles.errorText}>{errors.lastname}</Text>}
+                </View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Отчество</Text>
+                    <TextInput
+                        value={middlename}
+                        onChangeText={setMiddlename}
+                        style={styles.inputFormsBlock}/>
+                    {errors.middlename && <Text style={styles.errorText}>{errors.middlename}</Text>}
+                </View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Телефон</Text>
+                    <TextInput
+                        value={phone}
+                        onChangeText={setPhone}
+                        keyboardType={'number-pad'}
+                        style={styles.inputFormsBlock}/>
+                    {errors.phone && <Text style={styles.errorText}>{errors.phone}</Text>}
+                </View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Email</Text>
+                    <TextInput
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType={'email-address'}
+                        style={styles.inputFormsBlock}/>
+                    {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+                </View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Пароль</Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                        style={styles.inputFormsBlock}/>
+                    {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+                </View>
+                <View style={{paddingBottom: wp(4)}}>
+                    <Text style={styles.textTop}>Подтвердите пароль</Text>
+                    <TextInput
+                        value={passwordConfirm}
+                        onChangeText={setPasswordConfirm}
+                        secureTextEntry
+                        style={styles.inputFormsBlock}/>
+                    {errors.passwordConfirm && <Text style={styles.errorText}>{errors.passwordConfirm}</Text>}
                 </View>
             </View>
-        )
-    }
+            <View style={{alignItems: 'center', flexDirection: 'column', rowGap: wp(4)}}>
+                <TouchableOpacity onPress={trySignUp}>
+                    <ButtonAccentColor text={'Зарегистрироваться'}/>
+                </TouchableOpacity>
+                <Text style={styles.textAccept}>
+                    Нажимая на кнопку «Зарегистрироваться» Вы принимаете условия
+                </Text>
+                <UnderlineRouteText text={'Согласия на обработку персональных данных'} route={'HomePage'}/>
+            </View>
+        </View>
+    )
 }
-
-export default RegistrationForm
-
 const styles = StyleSheet.create({
     container: {
         width: wp(80),
@@ -137,6 +154,12 @@ const styles = StyleSheet.create({
         lineHeight: config.lineLarge,
         paddingBottom: wp(8)
     },
+    errorText: {
+      fontFamily: config.familyRegular,
+      fontSize: config.fontMedium,
+      lineHeight: config.lineMedium,
+      color: 'red'
+    },
     textTop: {
         fontSize: config.fontMedium,
         fontFamily: config.familyRegular,
@@ -151,3 +174,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
+export default RegistrationForm
+

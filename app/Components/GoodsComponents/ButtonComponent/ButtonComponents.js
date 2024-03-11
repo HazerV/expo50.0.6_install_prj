@@ -29,12 +29,12 @@ const SearchButtonComponent = () => {
 const ButtonComponents = ({text, route}) => {
     const navigation = useNavigation()
     return (
-        <TouchableOpacity onPress={() => navigation.navigate(`${route}`)}>
-            <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate(`${route}`)}>
+            {/*<View style={styles.container}>*/}
                 <Text style={styles.buttonText}>
                     {text}
                 </Text>
-            </View>
+            {/*</View>*/}
         </TouchableOpacity>
     )
 }
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         borderRadius: wp(2),
         // flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: wp(2)
     },
     goBackSearchButton: {
         width: wp(10),
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
     buttonText: {
         // paddingTop: wp(4),
         // paddingBottom: wp(4),
-        paddingLeft: wp(3),
-        paddingRight: wp(3),
+        // paddingLeft: wp(3),
+        // paddingRight: wp(3),
         fontSize: config.fontMedium,
         fontFamily: config.familyBold,
         lineHeight: config.lineMedium

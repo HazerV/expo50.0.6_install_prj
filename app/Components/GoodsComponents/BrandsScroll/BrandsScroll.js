@@ -11,7 +11,6 @@ const BrandsScroll = ({img}) => {
     img = BrandEx
     const navigation = useNavigation()
     const [Brands, SetBrands] = React.useState([])
-    const [Index, SetIndex] = React.useState()
     useEffect(() => {
         async function getData() {
             const get = await getBrands()
@@ -19,7 +18,6 @@ const BrandsScroll = ({img}) => {
         }
         getData()
     }, []);
-    console.log('ddd', Brands)
     return (
         <View style={{marginLeft: -wp(2.5)}}>
             <View style={styles.align}>

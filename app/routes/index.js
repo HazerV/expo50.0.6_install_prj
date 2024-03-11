@@ -10,9 +10,9 @@ import ProfilePage from "../Pages/ProfilePages/ProfilePage/ProfilePage";
 import RegisterPage from "../Pages/ProfilePages/RegisterPage/RegisterPage";
 import RecoverPasswordPage from "../Pages/ProfilePages/RecoverPasswordPage/RecoverPasswordPage";
 import AdressPage from "../Pages/ProfilePages/AdressPage/AdressPage";
-
 export default {
     HomePage,
+    RegisterPage,
     InfoPage,
     AdressPage,
     ProductPage,
@@ -22,6 +22,5 @@ export default {
     SelectedBrandPage,
     ContactsPage,
     ProfilePage,
-    RegisterPage,
     RecoverPasswordPage
 }
