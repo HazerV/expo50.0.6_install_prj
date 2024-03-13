@@ -3,6 +3,7 @@ import {createContext, useState} from "react";
 const PageContext = createContext()
 const ValueContext = createContext()
 const ThemeContext = createContext()
+const TokenContext = createContext()
 const AuthContext = createContext()
 const Context = ({children}) => {
 
@@ -10,7 +11,7 @@ const Context = ({children}) => {
     const [theme, setTheme] = useState('light')
     const [value, setValue] = useState(0)
     const [route, setRoute] = useState('HomePage')
-    console.log(route)
+    const [token, setToken] = useState('')
     const profile_ctx = {currentForm, setCurrentForm}
     const page_ctx = {route, setRoute}
     const theme_ctx = {theme, setTheme}
@@ -20,7 +21,9 @@ const Context = ({children}) => {
             <ThemeContext.Provider value={theme_ctx}>
                 <ValueContext.Provider value={val_ctx}>
                     <AuthContext.Provider value={profile_ctx}>
-                        {children}
+                        <TokenContext.Provider value={{token, setToken}}>
+                            {children}
+                        </TokenContext.Provider>
                     </AuthContext.Provider>
                 </ValueContext.Provider>
             </ThemeContext.Provider>
@@ -33,5 +36,6 @@ export {
     PageContext,
     ValueContext,
     ThemeContext,
-    AuthContext
+    AuthContext,
+    TokenContext
 }

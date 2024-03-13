@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, StyleSheet, Text, TouchableOpacity, TextInput} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, TextInput, Alert} from "react-native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import ButtonAccentColor from "../ButtonsProfile/ButtonAccentColor/ButtonAccentColor";
@@ -7,6 +7,9 @@ import UnderlineRouteText from "../../../GoodsComponents/UnderlineRouteText/Unde
 import {signUp} from "../../../../api/auth";
 import {signUpSchema} from "../../../../shemas";
 import * as Yup from 'yup'
+import {getToken} from "../../../../asyncStorage/StorageFunctions";
+import {TokenContext} from "../../../../context/Context";
+
 function RegistrationForm() {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
@@ -17,27 +20,42 @@ function RegistrationForm() {
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const [success, setSuccess] = useState(false)
     const [errors, setErrors] = useState({})
-    useEffect(() => {
-        signUp()
-            .then(res => console.log(res))
-    }, []);
+    const MOBILE_TOKEN = config.MOBILE_TOKEN
+    const {token, setToken} = React.useContext(TokenContext)
     const trySignUp = async () => {
         try {
-            await signUpSchema.validate({name, lastname, middlename, phone, email, password, passwordConfirm}, {abortEarly: false})
+            await signUpSchema.validate({
+                name,
+                lastname,
+                middlename,
+                phone,
+                email,
+                password,
+                passwordConfirm
+            }, {abortEarly: false})
             setErrors({})
             setSuccess(true)
-            if (success===true) {
-                    await signUp(
-                        {
-                            name: name,
-                            lastname: lastname,
-                            middlename: middlename,
-                            phone: phone,
-                            email: email,
-                            password: password
-                        })
-                        .then(res => console.log(res.data))
-                }
+            if (success === true) {
+                await signUp(
+                    {
+                        name: name,
+                        lastname: lastname,
+                        middlename: middlename,
+                        phone: phone,
+                        email: email,
+                        password: password,
+                        mobile_token: MOBILE_TOKEN
+                    })
+                    .then((res) => {
+                        const tkn = res.data.bearer
+                        console.log(res.data)
+                        if (res.data.status === 'err') {
+                            Alert.alert('Ошибка!', `${res.data.errorMessage}, status: ${res.data.status}`)
+                        } else if (res.data.status === 'ok') {
+                            getToken(`${tkn}`)
+                        }
+                    })
+            }
         } catch (err) {
             setSuccess(false)
             if (err instanceof Yup.ValidationError) {
@@ -131,6 +149,7 @@ function RegistrationForm() {
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         width: wp(80),
@@ -155,10 +174,10 @@ const styles = StyleSheet.create({
         paddingBottom: wp(8)
     },
     errorText: {
-      fontFamily: config.familyRegular,
-      fontSize: config.fontMedium,
-      lineHeight: config.lineMedium,
-      color: 'red'
+        fontFamily: config.familyRegular,
+        fontSize: config.fontMedium,
+        lineHeight: config.lineMedium,
+        color: 'red'
     },
     textTop: {
         fontSize: config.fontMedium,

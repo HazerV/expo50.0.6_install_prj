@@ -3,27 +3,37 @@ import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import ParamsBlackJs from "../../../../../../assets/icons/Filtering/ParamsBlackJs";
 import OpenAllBlackJs from "../../../../../../assets/icons/Filtering/OpenAllBlackJs";
 import {config} from "../../../../../config";
-import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Populars from "./Populars/Populars";
 import Filters from "./Filters/Filters";
-import Modal from "react-native-modal";
+
 const SortingFilter = () => {
     const [isVisible, setIsVisible] = useState(false)
+    const handlePress = () => {
+        if (isVisible === false) {
+            setIsVisible(true)
+        } else {
+            setIsVisible(false)
+        }
+    }
     return (
         <View style={styles.container}>
             {
                 isVisible === false ? (
-                    <TouchableOpacity onPress={() => setIsVisible(true)}>
-                        <Populars />
+                    <TouchableOpacity style={{paddingLeft: wp(2.5)}}
+                                      onPress={() => {
+                                          handlePress()
+                                      }}>
+                        <Populars/>
                     </TouchableOpacity>
                 ) : (
-                    <View>
-                     </View>
+                    <View style={styles.firstModalBackdrop}>
+
+                    </View>
                 )
             }
-
             <TouchableOpacity>
-                <Filters />
+                <Filters/>
             </TouchableOpacity>
         </View>
     )
@@ -49,6 +59,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         // borderWidth: 1
+    },
+    firstModalBackdrop: {
+        backgroundColor: 'black',
+        opacity: 0.5,
+        width: wp(100),
+        height: hp(100)
+    },
+    firstModal: {
+        height: wp(30),
+        width: wp(100),
+        backgroundColor: 'white'
     }
 })
 export default SortingFilter

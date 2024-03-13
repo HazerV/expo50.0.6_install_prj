@@ -1,16 +1,13 @@
-// import useFonts from "../assets/fonts/fonts";
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Navigation from "./routes/Navigation";
-import {Context, PageContext} from "./context/Context";
+import {Context} from "./context/Context";
 import * as SplashScreen from 'expo-splash-screen'
 import * as Font from "expo-font";
-import NavigationContainer from "expo-router/build/fork/NavigationContainer.native";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
-import HomePage from "./Pages/HomePage/HomePage";
-import InfoPage from "./Pages/InfoPage/InfoPage";
 import {NewAddressContexts} from "./context/AddressContext";
 import {NewCustomersContext} from "./context/CustomersContext";
 import {HomePageContext} from "./context/HomePageContext";
+import {ModalContexts} from "./context/ModalContexts";
 
 const Stack = createNativeStackNavigator()
 export default function Page() {
@@ -23,6 +20,7 @@ export default function Page() {
             'Gilroy-SemiBold': require('../assets/fonts/Gilroy-Semibold.ttf')
         }))
     }
+
     async function prepare() {
         try {
             useFonts()
@@ -33,6 +31,7 @@ export default function Page() {
             setIsReady(true)
         }
     }
+
     useEffect(() => {
         prepare()
     }, []);
@@ -50,7 +49,9 @@ export default function Page() {
             <NewAddressContexts>
                 <NewCustomersContext>
                     <HomePageContext>
-                        <Navigation/>
+                        <ModalContexts>
+                            <Navigation/>
+                        </ModalContexts>
                     </HomePageContext>
                 </NewCustomersContext>
             </NewAddressContexts>

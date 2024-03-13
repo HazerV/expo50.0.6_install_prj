@@ -4,10 +4,8 @@ import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableOpacity} from "react-native";
 import {config} from "../../../../config";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from "react-native-responsive-screen";
-import FilterModal from "../../FilterModal/FilterModal";
 import ParamsBlack from "../../../../../assets/icons/Filtering/ParamsBlackJs";
 const Filtering = () => {
-
     return (
         <View style={styles.container}>
             <TouchableOpacity>

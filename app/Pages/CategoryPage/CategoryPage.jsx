@@ -1,6 +1,5 @@
 import React from "react";
-import {View, SafeAreaView, Dimensions, Text, ScrollView, StyleSheet, Platform,} from "react-native";
-import ButtonComponents from "../../Components/GoodsComponents/ButtonComponent/ButtonComponents";
+import {View, SafeAreaView, Text, ScrollView, StyleSheet, Platform,} from "react-native";
 import CategoryHeader from "../../Components/PageComponents/Header/CategoryHeader/CategoryHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import {config} from "../../config";
@@ -9,20 +8,20 @@ import Footer from "../../Components/PageComponents/Footer/Footer";
 import Filtering from "../../Components/PageComponents/CategoryPageComponents/Filtering/Filtering";
 import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/GoodsInCategory";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
-import FooterInfo from "../../Components/PageComponents/InfoPageComp/FooterInfo/FooterInfo";
-import SortingFilter from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
+import SortingFilter
+    from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
+import SortingModal from "../../Components/PageComponents/CategoryPageComponents/ModalViews/SortingModal";
+import {ModalContext} from "../../context/ModalContexts";
 const CategoryPage = () => {
     return (
         <View>
             <SafeAreaView
-                style={{
-                    paddingTop: wp(2),
-                    backgroundColor: 'white'}}>
+                style={{ paddingTop: wp(2), backgroundColor: 'white' }}>
                 <CategoryHeader text={'Парфюмерия'}/>
             </SafeAreaView>
             <ScrollView bounces={false}
-                showsVerticalScrollIndicator={false}
-                style={styles.scrollView}>
+                        showsVerticalScrollIndicator={false}
+                        style={styles.scrollView}>
                 <View style={styles.container}>
                     <View style={styles.description}>
                         <Text style={styles.descriptionText}>
@@ -64,9 +63,9 @@ const CategoryPage = () => {
                     <Footer/>
                 </View>
             </ScrollView>
-                <View style={styles.footer}>
-                    <ButtonsInFooter/>
-                </View>
+            <View style={styles.footer}>
+                <ButtonsInFooter/>
+            </View>
         </View>
     )
 }
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         left: 0,
         right: 0,
-        padding: Platform.OS==='ios' ? wp(30) : wp(20)
+        padding: Platform.OS === 'ios' ? wp(30) : wp(20)
     }
 })
 

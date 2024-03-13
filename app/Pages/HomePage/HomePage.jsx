@@ -18,8 +18,12 @@ import {ThemeContext} from "../../context/Context";
 import {HomeContext} from "../../context/HomePageContext";
 import {getCategories} from "../../api/categories";
 import axios from "../../api/axios";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getToken} from "../../asyncStorage/StorageFunctions";
+import {OnlyCheckTocken} from "../../asyncStorage/StorageFunctions";
 const HomePage = () => {
+
+    OnlyCheckTocken()
     return (
         <View>
             <ScrollView
