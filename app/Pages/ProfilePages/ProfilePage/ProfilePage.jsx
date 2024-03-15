@@ -20,7 +20,7 @@ import HideWithKeyboard from "react-native-hide-with-keyboard";
 
 const ProfilePage = () => {
     const navigation = useNavigation()
-    const {currentForm} = React.useContext(AuthContext)
+    const {isAuth} = React.useContext(AuthContext)
     const {customer} = React.useContext(CustomerAddContext)
     const DefaultUserTab = () => {
         return (
@@ -31,9 +31,8 @@ const ProfilePage = () => {
             </View>
         )
     }
-
     function HandleState() {
-        if (currentForm === 0) {
+        if (isAuth === false) {
             return (
                 <View style={{alignItems: 'center'}}>
                     <LoginFirstForm/>
@@ -48,7 +47,7 @@ const ProfilePage = () => {
                 </View>
             )
         }
-        if (currentForm === 1) {
+        if (isAuth === true) {
             return (
                 <View>
                     <UnderHeaderSigns/>
@@ -60,7 +59,6 @@ const ProfilePage = () => {
             )
         }
     }
-
     return (
         <View>
             <ScrollView style={styles.scrollView}>

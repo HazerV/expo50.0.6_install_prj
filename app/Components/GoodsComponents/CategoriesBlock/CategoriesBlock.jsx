@@ -26,7 +26,6 @@ const CategoriesBlock = ({key, img}) => {
             <View style={styles.categoryBlock}>
                 {
                     Mesh.map((image, index) => (
-                        console.log(image),
                         <TouchableOpacity onPress={() => navigation.navigate('CategoryPage')}>
                             <Image style={{
                                 width: wp(45.8),

@@ -1,13 +1,16 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
+import {ActivityIndicator, View} from "react-native";
 import Navigation from "./routes/Navigation";
 import {Context} from "./context/Context";
-import * as SplashScreen from 'expo-splash-screen'
 import * as Font from "expo-font";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 import {NewAddressContexts} from "./context/AddressContext";
-import {NewCustomersContext} from "./context/CustomersContext";
+import {CustomerInfoContext, NewCustomersContext} from "./context/CustomersContext";
 import {HomePageContext} from "./context/HomePageContext";
 import {ModalContexts} from "./context/ModalContexts";
+import {GetToken} from "./asyncStorage/StorageFunctions";
+import {getCustomer} from "./api/customers";
+import {config} from "./config";
 
 const Stack = createNativeStackNavigator()
 export default function Page() {
@@ -23,8 +26,10 @@ export default function Page() {
 
     async function prepare() {
         try {
-            useFonts()
+            const val = await GetToken()
+            await getCustomer(val)
             await new Promise((res) => setTimeout(res, 2000))
+            useFonts()
         } catch (e) {
             console.warn(e)
         } finally {
@@ -35,15 +40,18 @@ export default function Page() {
     useEffect(() => {
         prepare()
     }, []);
-    const onLayoutRootView = useCallback(async () => {
-        if (isReady) {
-            await SplashScreen.hideAsync()
-        }
-    }, [isReady])
     if (!isReady) {
-        return null
+        return (
+            <View>
+                <ActivityIndicator style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: config.accentColor,
+                    flex: 1
+                }} size='large'/>
+            </View>
+        )
     }
-
     return (
         <Context>
             <NewAddressContexts>

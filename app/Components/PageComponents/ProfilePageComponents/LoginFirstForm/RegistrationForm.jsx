@@ -7,9 +7,9 @@ import UnderlineRouteText from "../../../GoodsComponents/UnderlineRouteText/Unde
 import {signUp} from "../../../../api/auth";
 import {signUpSchema} from "../../../../shemas";
 import * as Yup from 'yup'
-import {getToken} from "../../../../asyncStorage/StorageFunctions";
 import {TokenContext} from "../../../../context/Context";
-
+import {useAsyncStorage, UpdateToken} from "../../../../asyncStorage/StorageFunctions";
+import {CustomerInfoContext} from "../../../../context/CustomersContext";
 function RegistrationForm() {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
@@ -21,7 +21,6 @@ function RegistrationForm() {
     const [success, setSuccess] = useState(false)
     const [errors, setErrors] = useState({})
     const MOBILE_TOKEN = config.MOBILE_TOKEN
-    const {token, setToken} = React.useContext(TokenContext)
     const trySignUp = async () => {
         try {
             await signUpSchema.validate({
@@ -47,12 +46,14 @@ function RegistrationForm() {
                         mobile_token: MOBILE_TOKEN
                     })
                     .then((res) => {
-                        const tkn = res.data.bearer
                         console.log(res.data)
+                        const tkn = res.data.bearer
                         if (res.data.status === 'err') {
+                            console.log(res.data)
                             Alert.alert('Ошибка!', `${res.data.errorMessage}, status: ${res.data.status}`)
-                        } else if (res.data.status === 'ok') {
-                            getToken(`${tkn}`)
+                        } if (res.data.status === 'ok') {
+                            UpdateToken(tkn)
+                            console.log('ook')
                         }
                     })
             }

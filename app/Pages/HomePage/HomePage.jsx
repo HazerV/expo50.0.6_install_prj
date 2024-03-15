@@ -23,7 +23,6 @@ import {getToken} from "../../asyncStorage/StorageFunctions";
 import {OnlyCheckTocken} from "../../asyncStorage/StorageFunctions";
 const HomePage = () => {
 
-    OnlyCheckTocken()
     return (
         <View>
             <ScrollView
