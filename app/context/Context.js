@@ -15,6 +15,8 @@ const Context = ({children}) => {
     const page_ctx = {route, setRoute}
     const theme_ctx = {theme, setTheme}
     const val_ctx = {value, setValue}
+
+    console.log(isAuth, 'in ctx')
     return (
         <PageContext.Provider value={page_ctx}>
             <ThemeContext.Provider value={theme_ctx}>

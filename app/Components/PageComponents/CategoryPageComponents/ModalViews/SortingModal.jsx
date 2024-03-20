@@ -1,8 +1,8 @@
 import React from "react";
 import {View, StyleSheet, Text} from "react-native";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from "react-native-responsive-screen";
 import {config} from "../../../../config";
 import {ModalContext} from "../../../../context/ModalContexts";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from "react-native-responsive-screen";
 function SortingModal () {
     return (
         <View style={styles.containerModal}>

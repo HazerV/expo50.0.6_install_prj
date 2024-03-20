@@ -1,14 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {View, StyleSheet, Text, TouchableOpacity, Image} from "react-native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Parfum from "../../../../assets/images/Parfum.png";
 import {config} from "../../../config";
 import {useNavigation} from "@react-navigation/native";
 import {getMesh} from "../../../api/banners";
+import {PageContext} from "../../../context/Context";
+import {CategoryContext} from "../../../context/CategoriesContext";
 
 const CategoriesBlock = ({key, img}) => {
     const navigation = useNavigation()
-
+    const {meshName, setMeshName} = useContext(CategoryContext)
     const [Mesh, SetMesh] = React.useState([])
     useEffect(() => {
         async function getData() {
@@ -17,7 +19,6 @@ const CategoriesBlock = ({key, img}) => {
         }
         getData()
     }, []);
-
     return (
         <View>
             <Text style={styles.textCommon}>
@@ -25,13 +26,16 @@ const CategoriesBlock = ({key, img}) => {
             </Text>
             <View style={styles.categoryBlock}>
                 {
-                    Mesh.map((image, index) => (
-                        <TouchableOpacity onPress={() => navigation.navigate('CategoryPage')}>
+                    Mesh.map((item, index,) => (
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate(`CategoryPage`),
+                                setMeshName(item.title)
+                        }}>
                             <Image style={{
                                 width: wp(45.8),
                                 height: wp(45.8),
                                 borderRadius: wp(2)
-                            }} key={index} source={{uri: `${image.image.photo_mobile}`}}/>
+                            }} key={index} source={{uri: `${item.image.photo_mobile}`}}/>
                         </TouchableOpacity>
                     ))
                 }

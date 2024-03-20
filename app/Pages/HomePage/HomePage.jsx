@@ -9,20 +9,12 @@ import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Footer from "../../Components/PageComponents/Footer/Footer";
 import BrandsScroll from "../../Components/GoodsComponents/BrandsScroll/BrandsScroll";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
-import HistoriesBlockScroll from "../../Components/GoodsComponents/HistoriesBlockScroll/HistoriesBlockScroll";
 import CategoriesBlock from "../../Components/GoodsComponents/CategoriesBlock/CategoriesBlock";
 import TopSellsGoods from "../../Components/GoodsComponents/TopSellsGoods/TopSellsGoods";
 import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSlider";
-import {getBanners, getMesh} from "../../api/banners";
-import {ThemeContext} from "../../context/Context";
-import {HomeContext} from "../../context/HomePageContext";
-import {getCategories} from "../../api/categories";
-import axios from "../../api/axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getToken} from "../../asyncStorage/StorageFunctions";
-import {OnlyCheckTocken} from "../../asyncStorage/StorageFunctions";
-const HomePage = () => {
+import HistoriesBlockScroll from "../../Components/GoodsComponents/HistoriesBlockScroll/HistoriesBlockScroll";
 
+const HomePage = () => {
     return (
         <View>
             <ScrollView

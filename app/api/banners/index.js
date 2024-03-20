@@ -11,7 +11,11 @@ export async function getBanners() {
 export async function getMesh() {
     return await axios.get('/promo/mesh')
         .then((res) => {
-            return (res.data.banners)
+            const mapped = res.data.banners
+            return (
+                res.data.banners
+
+            )
         })
         .catch(e => console.log(res.data.status))
 }

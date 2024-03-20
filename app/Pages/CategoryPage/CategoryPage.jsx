@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {View, SafeAreaView, Text, ScrollView, StyleSheet, Platform,} from "react-native";
 import CategoryHeader from "../../Components/PageComponents/Header/CategoryHeader/CategoryHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -12,12 +12,16 @@ import SortingFilter
     from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
 import SortingModal from "../../Components/PageComponents/CategoryPageComponents/ModalViews/SortingModal";
 import {ModalContext} from "../../context/ModalContexts";
+import {PageContext} from "../../context/Context";
+import {CategoryContext} from "../../context/CategoriesContext";
 const CategoryPage = () => {
+    const {route} = useContext(PageContext)
+    const {meshName} = useContext(CategoryContext)
     return (
         <View>
             <SafeAreaView
                 style={{ paddingTop: wp(2), backgroundColor: 'white' }}>
-                <CategoryHeader text={'Парфюмерия'}/>
+                <CategoryHeader text={meshName}/>
             </SafeAreaView>
             <ScrollView bounces={false}
                         showsVerticalScrollIndicator={false}

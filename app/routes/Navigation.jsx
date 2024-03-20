@@ -3,8 +3,10 @@ import NavigationContainer from "expo-router/build/fork/NavigationContainer.nati
 import {PageContext} from "../context/Context";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 import routes from './index'
+
 const Stack = createNativeStackNavigator()
 import {useNavigationContainerRef} from "@react-navigation/native";
+
 const Navigation = () => {
     const {route, setRoute} = useContext(PageContext)
     const navigationRef = useNavigationContainerRef()
@@ -25,12 +27,12 @@ const Navigation = () => {
                 {
                     Object.keys(routes).map((name) => (
                         <Stack.Screen
-                        name={name}
-                        component={routes[name]}
-                        options={{
-                            navigationBarHidden: true,
-                            headerShown: false
-                        }}
+                            name={name}
+                            component={routes[name]}
+                            options={{
+                                navigationBarHidden: true,
+                                headerShown: false
+                            }}
                         />
                     ))
                 }
