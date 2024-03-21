@@ -10,7 +10,9 @@ import ProfilePage from "../Pages/ProfilePages/ProfilePage/ProfilePage";
 import RegisterPage from "../Pages/ProfilePages/RegisterPage/RegisterPage";
 import RecoverPasswordPage from "../Pages/ProfilePages/RecoverPasswordPage/RecoverPasswordPage";
 import AdressPage from "../Pages/ProfilePages/AdressPage/AdressPage";
+import TestPage from "../Pages/tests (optional)/testPage";
 export default {
+    // TestPage,
     HomePage,
     RegisterPage,
     InfoPage,

@@ -7,7 +7,6 @@ import {useNavigation} from "@react-navigation/native";
 import {getMesh} from "../../../api/banners";
 import {PageContext} from "../../../context/Context";
 import {CategoryContext} from "../../../context/CategoriesContext";
-
 const CategoriesBlock = ({key, img}) => {
     const navigation = useNavigation()
     const {meshName, setMeshName} = useContext(CategoryContext)

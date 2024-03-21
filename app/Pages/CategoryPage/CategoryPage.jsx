@@ -1,8 +1,8 @@
-import React, {useContext} from "react";
-import {View, SafeAreaView, Text, ScrollView, StyleSheet, Platform,} from "react-native";
+import React, {useContext, useEffect, useState} from "react";
+import {View, SafeAreaView, Text, ScrollView, StyleSheet, Platform, ActivityIndicator} from "react-native";
+import {config} from "../../config";
 import CategoryHeader from "../../Components/PageComponents/Header/CategoryHeader/CategoryHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
-import {config} from "../../config";
 import PodCategoryButton from "../../Components/PageComponents/CategoryPageComponents/PodCategory/PodCategoryButton";
 import Footer from "../../Components/PageComponents/Footer/Footer";
 import Filtering from "../../Components/PageComponents/CategoryPageComponents/Filtering/Filtering";
@@ -10,17 +10,46 @@ import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/Go
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
 import SortingFilter
     from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
-import SortingModal from "../../Components/PageComponents/CategoryPageComponents/ModalViews/SortingModal";
-import {ModalContext} from "../../context/ModalContexts";
-import {PageContext} from "../../context/Context";
 import {CategoryContext} from "../../context/CategoriesContext";
+import axios from "../../api/axios";
+
 const CategoryPage = () => {
-    const {route} = useContext(PageContext)
+    const [state, setState] = useState(
+        {
+            loading: false,
+            good: {
+                id: null,
+                name: '',
+                model: '',
+                slug: '',
+                description: '',
+                price: '',
+                quantity: null,
+                images: {
+                    image_mobile: ''
+                },
+                is_available: false
+            }
+        }
+    )
+    useEffect(() => {
+        setState({loading: true})
+        axios.get('/products/getByCategoryId?slug=parfyumeriya')
+            .then((resp) => {
+                const allGoods = resp.data
+                setState({
+                    loading: false,
+                    good: allGoods
+                })
+            })
+    }, [setState]);
+    console.log(state.good)
+
     const {meshName} = useContext(CategoryContext)
     return (
         <View>
             <SafeAreaView
-                style={{ paddingTop: wp(2), backgroundColor: 'white' }}>
+                style={{paddingTop: wp(2), backgroundColor: 'white'}}>
                 <CategoryHeader text={meshName}/>
             </SafeAreaView>
             <ScrollView bounces={false}
@@ -38,30 +67,20 @@ const CategoryPage = () => {
                     <View style={styles.buttonsUnderHeader}>
                         <PodCategoryButton text={'Подкатегория '}/>
                         <PodCategoryButton text={'Подкатегория вторая'}/>
+                        <PodCategoryButton text={'Духи'}/>
                         <PodCategoryButton text={'Подкатегория 2333'}/>
                         <PodCategoryButton text={'Парфюм 7'}/>
-                        <PodCategoryButton text={'Духи'}/>
                     </View>
                 </View>
                 <SortingFilter/>
                 <Filtering/>
                 <View style={styles.mainBlock}>
-                    <GoodsInCategory route={'ProductPage'} newPrice={1500} firstPrice={2100}
-                                     description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1700} route={'ProductPage'} firstPrice={2100}
-                                     description={'Доступен от 5 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1800} firstPrice={2100} route={'ProductPage'}
-                                     description={'Доступен от 7 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1100} firstPrice={1900} route={'ProductPage'}
-                                     description={'Доступен от 3 мл'} name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1500} firstPrice={2100} description={'Доступен от 3 мл'}
-                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1700} firstPrice={2100} description={'Доступен от 5 мл'}
-                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1800} firstPrice={2100} description={'Доступен от 7 мл'}
-                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <GoodsInCategory newPrice={1100} firstPrice={1900} description={'Доступен от 3 мл'}
-                                     name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    {
+                        state.map((item) => {
+                            console.log('in map ', item)
+                        })
+                    }
+                    <GoodsInCategory props={state.good}/>
                 </View>
                 <View style={{paddingBottom: 100}}>
                     <Footer/>
