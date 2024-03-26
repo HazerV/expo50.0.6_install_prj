@@ -13,7 +13,6 @@ import CategoriesBlock from "../../Components/GoodsComponents/CategoriesBlock/Ca
 import TopSellsGoods from "../../Components/GoodsComponents/TopSellsGoods/TopSellsGoods";
 import BannerSlider from "../../Components/GoodsComponents/BannerSlider/BannerSlider";
 import HistoriesBlockScroll from "../../Components/GoodsComponents/HistoriesBlockScroll/HistoriesBlockScroll";
-
 const HomePage = () => {
     return (
         <View>

@@ -34,7 +34,7 @@ const CategoriesBlock = ({key, img}) => {
                                 width: wp(45.8),
                                 height: wp(45.8),
                                 borderRadius: wp(2)
-                            }} key={index} source={{uri: `${item.image.photo_mobile}`}}/>
+                            }} key={index} source={{uri: `${item.image.photo2x}`}}/>
                         </TouchableOpacity>
                     ))
                 }

@@ -40,10 +40,9 @@ const BrandsScroll = ({img}) => {
                             .flat()
                             .map(
                                 (image, index) => {
-                                    image.photo_mobile
                                     return (
                                         <TouchableOpacity onPress={() => navigation.navigate('SelectedBrandPage')}>
-                                            <Image style={styles.image} source={{uri: `${image.photo_mobile}`}}/>
+                                            <Image style={styles.image} source={{uri: `${image.photo2x}`}}/>
                                         </TouchableOpacity>
                                     )
                                 })

@@ -8,44 +8,23 @@ import Footer from "../../Components/PageComponents/Footer/Footer";
 import Filtering from "../../Components/PageComponents/CategoryPageComponents/Filtering/Filtering";
 import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/GoodsInCategory";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
-import SortingFilter
-    from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
+import SortingFilter from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
 import {CategoryContext} from "../../context/CategoriesContext";
 import axios from "../../api/axios";
+import {getCategories} from "../../api/categories";
 
 const CategoryPage = () => {
-    const [state, setState] = useState(
-        {
-            loading: false,
-            good: {
-                id: null,
-                name: '',
-                model: '',
-                slug: '',
-                description: '',
-                price: '',
-                quantity: null,
-                images: {
-                    image_mobile: ''
-                },
-                is_available: false
-            }
-        }
-    )
+    const [state, setState] = useState([])
+    const {meshName} = useContext(CategoryContext)
     useEffect(() => {
-        setState({loading: true})
-        axios.get('/products/getByCategoryId?slug=parfyumeriya')
-            .then((resp) => {
-                const allGoods = resp.data
-                setState({
-                    loading: false,
-                    good: allGoods
-                })
+        getCategories()
+            .then((res) => {
+                setState(res.data.categories)
+                console.log('in ax ', state)
             })
     }, [setState]);
-    console.log(state.good)
-
-    const {meshName} = useContext(CategoryContext)
+    console.log(state.find(({name}) => name === meshName))
+    console.log('her', meshName)
     return (
         <View>
             <SafeAreaView
@@ -75,11 +54,6 @@ const CategoryPage = () => {
                 <SortingFilter/>
                 <Filtering/>
                 <View style={styles.mainBlock}>
-                    {
-                        state.map((item) => {
-                            console.log('in map ', item)
-                        })
-                    }
                     <GoodsInCategory props={state.good}/>
                 </View>
                 <View style={{paddingBottom: 100}}>
