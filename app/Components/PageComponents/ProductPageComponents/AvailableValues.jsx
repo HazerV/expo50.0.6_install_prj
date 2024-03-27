@@ -5,13 +5,11 @@ import {config} from "../../../config";
 import {ValueContext} from "../../../context/Context";
 
 const AvailableValues = ({count}) => {
-
     const {value, setValue} = useContext(ValueContext)
     const dynamicStyles = {
         bgColor: value === count ? config.accentLightColor : 'white',
         borderColor: value === count ? config.accentLightColor : '#CCCCCC'
     }
-
     return (
         <TouchableOpacity onPress={() => setValue(count)}>
             <View style={[styles.container, {
@@ -33,7 +31,8 @@ const styles = StyleSheet.create({
         borderRadius: wp(2),
         borderWidth: wp(0.5),
         height: wp(10),
-        width: wp(15)
+        width: wp(15),
+        flexDirection: 'row'
     },
     text: {
         fontSize: config.fontMedium,

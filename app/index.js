@@ -11,6 +11,7 @@ import {CategoriesContext} from "./context/CategoriesContext";
 import {GetToken} from "./asyncStorage/StorageFunctions";
 import {getCustomer} from "./api/customers";
 import {config} from "./config";
+import {ProductContextInApp} from "./context/ProductContext";
 
 export default function Page() {
     const [isReady, setIsReady] = useState(false)
@@ -55,7 +56,9 @@ export default function Page() {
                     <HomePageContext>
                         <ModalContexts>
                             <CategoriesContext>
-                                <Navigation/>
+                                <ProductContextInApp>
+                                    <Navigation/>
+                                </ProductContextInApp>
                             </CategoriesContext>
                         </ModalContexts>
                     </HomePageContext>

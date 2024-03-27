@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, Platform} from "react-native";
+import React, {useContext, useEffect, useState} from "react";
+import {View, Text, StyleSheet, SafeAreaView, ScrollView, Image, Platform, ActivityIndicator} from "react-native";
 import {config} from "../../config";
 import HeaderForProduct from "../../Components/PageComponents/Header/HeaderForProduct/HeaderForProduct";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -11,72 +11,83 @@ import SimilarGoods from "../../Components/PageComponents/ProductPageComponents/
 import Footer from "../../Components/PageComponents/Footer/Footer";
 import ProductNullBlock from "../../Components/PageComponents/ProductPageComponents/ProductNullBlock/ProductNullBlock";
 import SliderProduct from "../../Components/PageComponents/ProductPageComponents/SliderProduct/SliderProduct";
-const ProductPage = ({count}) => {
+import {ProductContext} from "../../context/ProductContext";
+import {getProductById} from "../../api/products";
+
+const ProductPage = ({count, route}) => {
+    const id = route.params
+    const [attributes, setAttributes] = useState([])
+    const [productData, setProductData] = useState([])
+    const [offers, setOffers] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        getProductById(id.id)
+            .then((res) => {
+                setOffers(res.data.offers)
+                setProductData(res.data)
+                setAttributes(res.data.attributes)
+            })
+            .catch((err) => console.error(err))
+            .finally(setLoading(false))
+    }, []);
     return (
-        <View>
-            <SafeAreaView style={{backgroundColor: 'white', paddingTop: wp(2)}}>
-                <HeaderForProduct/>
-            </SafeAreaView>
-            <ScrollView showsVerticalScrollIndicator={false}
-                        style={{height: '100%', backgroundColor: 'white'}}>
-                <View style={styles.container}>
-                    <SliderProduct />
-                    {
-                        count === 0 ? (
-                            <ProductNullBlock />
-                        ) : (
-                            <ChooseValue/>
-                        )
-                    }
-                    <View style={styles.descBlock}>
-                        <Text style={styles.descriptionHead}>
-                            Описание
-                        </Text>
-                        <Text style={styles.descriptionText}>
-                            Carbone de Balmain Eau de Toilette Balmain (в России известен как «Бальман Карбон»), выпущенный в 2010 году, классифицируется как аромат для мужчин и принадлежит семействам Пряные и Древесные.
-                        </Text>
-                    </View>
-                    <View style={{paddingBottom: wp(6), width: wp(95)}}>
-                        <Text style={styles.descriptionHead}>
-                            Ноты
-                        </Text>
-                        <Text style={styles.descriptionText}>
-                            Композицию составляют следующие ноты и аккорды: Бензоин, Благовония, Бурбон, Элеми, Инжир, Лист фиалки, Мускус, Плющ и Ветивер.
-                        </Text>
-                    </View>
-                    <View style={{paddingBottom: wp(4)}}>
-                        <Text style={styles.charectText}>
-                            Характеристики:
-                        </Text>
-                        <View style={styles.textInBlock}>
-                            <Text style={styles.brandName}>
-                                Бренд
+        loading === false ? (
+            <View>
+                <SafeAreaView style={{backgroundColor: 'white', paddingTop: wp(2)}}>
+                    <HeaderForProduct name={productData.name}/>
+                </SafeAreaView>
+                <ScrollView showsVerticalScrollIndicator={false}
+                            style={styles.scrollView}>
+                    <View style={styles.container}>
+                        <SliderProduct/>
+                        {
+                            productData.isAvailable === false ? (
+                                <ProductNullBlock/>
+                            ) : (
+                                <ChooseValue props={offers}/>
+                            )
+                        }
+                        {/*<ChooseValue />*/}
+                        <View style={styles.descBlock}>
+                            <Text style={styles.descriptionHead}>
+                                Описание
                             </Text>
-                            <View style={styles.border} />
-                            <Text style={styles.nameOfBrand}>
-                                Bruno Banani
+                            <Text style={styles.descriptionText}>
+                                {productData.description}
                             </Text>
                         </View>
-                        <View style={styles.textInBlock}>
-                            <Text style={styles.brandName}>
-                                Бренд
+                        <View style={{paddingBottom: wp(4)}}>
+                            <Text style={styles.charectText}>
+                                Характеристики:
                             </Text>
-                            <View style={styles.border} />
-                            <Text style={styles.nameOfBrand}>
-                                Bruno Banani
-                            </Text>
+                            {
+                                attributes.map((item) =>
+                                    <View style={styles.textInBlock}>
+                                        <Text style={styles.brandName}>
+                                            {item.name}
+                                        </Text>
+                                        <View style={styles.border}/>
+                                        <Text style={styles.nameOfBrand}>
+                                            {item.value}
+                                        </Text>
+                                    </View>
+                                )
+                            }
                         </View>
+                        <BrandParfumeBlock/>
+                        <ThisBrandGoods/>
+                        <SimilarGoods/>
                     </View>
-                        <BrandParfumeBlock />
-                        <ThisBrandGoods />
-                        <SimilarGoods />
+                    <Footer/>
+                </ScrollView>
+                <View style={styles.footer}>
+                    <ButtonsInFooter/>
                 </View>
-                <Footer />
-            </ScrollView>
-            <View style={styles.footer}>
-                <ButtonsInFooter />
             </View>
-        </View>
+        ) : (
+            <ActivityIndicator size={'large'} color={config.accentColor} style={styles.indicator}/>
+        )
+
     )
 }
 const styles = StyleSheet.create({
@@ -84,6 +95,10 @@ const styles = StyleSheet.create({
         paddingLeft: wp(2.5),
         backgroundColor: 'white',
         paddingBottom: wp(15)
+    },
+    scrollView: {
+        height: '100%',
+        backgroundColor: 'white'
     },
     image: {
         resizeMode: 'cover',
@@ -160,8 +175,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         left: 0,
         right: 0,
-        padding: Platform.OS==='ios' ? wp(30) : wp(15)
+        padding: Platform.OS === 'ios' ? wp(30) : wp(15)
+    },
+    indicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 
 export default ProductPage
+
+{/*<View style={{paddingBottom: wp(6), width: wp(95)}}>*/
+}
+{/*    <Text style={styles.descriptionHead}>*/
+}
+{/*        Ноты*/
+}
+{/*    </Text>*/
+}
+{/*    <Text style={styles.descriptionText}>*/
+}
+{/*        Композицию составляют следующие ноты и аккорды: Бензоин, Благовония, Бурбон, Элеми, Инжир,*/
+}
+{/*        Лист фиалки, Мускус, Плющ и Ветивер.*/
+}
+{/*    </Text>*/
+}
+{/*</View>*/
+}

@@ -22,11 +22,11 @@ const HomePage = () => {
                 <Header city={'Москва'}/>
                 <View style={styles.container}>
                     <View style={styles.mainBlock}>
-                        <BannerSlider/>
-                        {/*<HistoriesBlockScroll/>*/}
                         <BrandsScroll/>
                         <CategoriesBlock/>
-                        <TopSellsGoods/>
+                        {/*<HistoriesBlockScroll/>*/}
+                        {/*<BannerSlider/>*/}
+                        {/*<TopSellsGoods/>*/}
                     </View>
                     <Footer/>
                 </View>

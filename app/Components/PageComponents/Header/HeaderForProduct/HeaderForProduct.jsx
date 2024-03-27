@@ -9,9 +9,6 @@ import AddToFavorite from "./AddToFavorite";
 
 
 const HeaderForProduct = ({id, name}) => {
-
-    name = 'Bruno Banani'
-
     const navigation = useNavigation()
     return (
         <View style={styles.container}>

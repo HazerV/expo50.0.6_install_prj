@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {config} from "../../../config";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -6,11 +6,13 @@ import AvailableValues from "./AvailableValues";
 import {ValueContext} from "../../../context/Context";
 import Counter from "./Counter";
 
-const ChooseValue = ({id}) => {
-
+const ChooseValue = ({props}) => {
     const {value} = useContext(ValueContext)
-    const price = 5000
 
+    const mapped = props.map((item) => item)
+    const found = mapped.find(({quantity}) => quantity === value)
+    console.log(mapped)
+    console.log('founded', found.price)
     return (
         <View style={styles.container}>
             <View style={styles.elements}>
@@ -18,19 +20,22 @@ const ChooseValue = ({id}) => {
                     Выберите объем:
                 </Text>
                 <View style={styles.values}>
-                    <AvailableValues count={2}/>
-                    <AvailableValues count={5}/>
-                    <AvailableValues count={15}/>
-                    <AvailableValues count={30}/>
+                    {
+                        props.map((item) =>
+                            <View style={styles.values}>
+                                <AvailableValues count={item.quantity}/>
+                            </View>
+                        )
+                    }
                 </View>
-                <View style={{flexDirection: 'row', columnGap: wp(3) }}>
-                    <Counter />
-                    <View style={{flexDirection: 'column', justifyContent: 'center' }}>
+                <View style={{flexDirection: 'row', columnGap: wp(3)}}>
+                    <Counter/>
+                    <View style={{flexDirection: 'column', justifyContent: 'center'}}>
                         <Text style={styles.textPrice}>
-                            {price} руб
+                            {found.price} руб
                         </Text>
                         <Text style={styles.textValue}>
-                            {value} мл
+                            {found.quantity} мл
                         </Text>
                     </View>
                 </View>

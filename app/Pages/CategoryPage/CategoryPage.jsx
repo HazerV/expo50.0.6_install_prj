@@ -1,5 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
-import {View, SafeAreaView, Text, ScrollView, StyleSheet, Platform, ActivityIndicator} from "react-native";
+import {
+    View,
+    SafeAreaView,
+    Text,
+    ScrollView,
+    StyleSheet,
+    Platform,
+    ActivityIndicator,
+    RefreshControl
+} from "react-native";
 import {config} from "../../config";
 import CategoryHeader from "../../Components/PageComponents/Header/CategoryHeader/CategoryHeader";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
@@ -8,32 +17,56 @@ import Footer from "../../Components/PageComponents/Footer/Footer";
 import Filtering from "../../Components/PageComponents/CategoryPageComponents/Filtering/Filtering";
 import GoodsInCategory from "../../Components/GoodsComponents/GoodsInCategory/GoodsInCategory";
 import ButtonsInFooter from "../../Components/PageComponents/Footer/ButtonsInFooter/ButtonsInFooter";
-import SortingFilter from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
+import SortingFilter
+    from "../../Components/PageComponents/CategoryPageComponents/FilterComponents/SortingFilter/SortingFilter";
 import {CategoryContext} from "../../context/CategoriesContext";
 import axios from "../../api/axios";
 import {getCategories} from "../../api/categories";
+import {getProducts} from "../../api/products";
 
 const CategoryPage = () => {
     const [state, setState] = useState([])
+    const [productsData, setProductsData] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [refreshing, setRefreshing] = useState(false)
     const {meshName} = useContext(CategoryContext)
     useEffect(() => {
         getCategories()
-            .then((res) => {
-                setState(res.data.categories)
-                console.log('in ax ', state)
-            })
-    }, [setState]);
-    console.log(state.find(({name}) => name === meshName))
-    console.log('her', meshName)
+            .then(async (res) => {
+                let firstRes = res.data.categories
+                let find = firstRes.find(({name}) => name === meshName);
+                setState(find);
+                getProducts(find.id)
+                    .then((res) => {
+                        setProductsData(res.data.products)
+                        setLoading(true)
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
+            }).catch((error) => {
+            console.error(error)
+        })
+    }, [setState, setProductsData]);
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
     return (
         <View>
             <SafeAreaView
-                style={{paddingTop: wp(2), backgroundColor: 'white'}}>
+                style={styles.areaView}>
                 <CategoryHeader text={meshName}/>
             </SafeAreaView>
-            <ScrollView bounces={false}
-                        showsVerticalScrollIndicator={false}
-                        style={styles.scrollView}>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} size={'large'}/>
+                }
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+                style={styles.scrollView}>
                 <View style={styles.container}>
                     <View style={styles.description}>
                         <Text style={styles.descriptionText}>
@@ -54,7 +87,19 @@ const CategoryPage = () => {
                 <SortingFilter/>
                 <Filtering/>
                 <View style={styles.mainBlock}>
-                    <GoodsInCategory props={state.good}/>
+                    {
+                        loading === true ? (
+                            productsData.map((product) =>
+                                    product.isAvailable !== false && (
+                                        <GoodsInCategory firstPrice={product.price_old} name={product.name} id={product.id} quantity={product.quantity}
+                                                         newPrice={product.price} imageSrc={product.images.photo2x}/>
+                                    )
+                            )
+                        ) : (
+                            <ActivityIndicator size={'large'} color={config.accentColor}
+                                               style={styles.activityIndicator}/>
+                        )
+                    }
                 </View>
                 <View style={{paddingBottom: 100}}>
                     <Footer/>
@@ -72,7 +117,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
-    scrollView: {height: '100%', backgroundColor: 'white'},
+    areaView: {
+        paddingTop: wp(2),
+        backgroundColor: 'white'
+    },
+    scrollView: {
+        height: '100%',
+        backgroundColor: 'white'
+    },
     mainBlock: {
         paddingLeft: wp(2.5),
         flexDirection: 'row',
@@ -111,6 +163,12 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         padding: Platform.OS === 'ios' ? wp(30) : wp(20)
+    },
+    activityIndicator: {
+        justifyContent: 'center',
+        flex: 1,
+        alignSelf: 'center',
+        paddingTop: wp(10)
     }
 })
 

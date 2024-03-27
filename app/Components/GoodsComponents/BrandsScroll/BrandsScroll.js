@@ -1,5 +1,15 @@
 import React, {useEffect} from "react";
-import {View, Text, StyleSheet, ScrollView, Image, Linking, TouchableOpacity, Pressable} from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    ScrollView,
+    Image,
+    Linking,
+    TouchableOpacity,
+    Pressable,
+    ActivityIndicator
+} from "react-native";
 import BrandEx from '../../../../assets/images/BrandEx.png'
 import ArrowSvg from '../../../../assets/icons/ArrowJs'
 import {config} from "../../../config";
@@ -11,10 +21,12 @@ const BrandsScroll = ({img}) => {
     img = BrandEx
     const navigation = useNavigation()
     const [Brands, SetBrands] = React.useState([])
+    const [loading, setLoading] = React.useState(true)
     useEffect(() => {
         async function getData() {
             const get = await getBrands()
             SetBrands(get)
+            setLoading(false)
         }
         getData()
     }, []);
@@ -24,6 +36,7 @@ const BrandsScroll = ({img}) => {
                 <Text style={styles.allBrandsText}>
                     Бренды
                 </Text>
+
                 <TouchableOpacity onPress={() => navigation.navigate('BrandPage')}>
                     <View style={styles.allBrands}>
                         <Text style={styles.allBrandsText}>
@@ -32,23 +45,28 @@ const BrandsScroll = ({img}) => {
                         <ArrowSvg/>
                     </View>
                 </TouchableOpacity>
-            </View>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={styles.imageBlock}>
-                    {
-                        Brands.map((item, index) => item.images)
-                            .flat()
-                            .map(
-                                (image, index) => {
-                                    return (
-                                        <TouchableOpacity onPress={() => navigation.navigate('SelectedBrandPage')}>
-                                            <Image style={styles.image} source={{uri: `${image.photo2x}`}}/>
-                                        </TouchableOpacity>
-                                    )
-                                })
-                    }
-                </View>
-            </ScrollView>
+            </View>{
+            loading === true ? (
+                <ActivityIndicator color={config.accentColor} size={'large'} style={styles.activityIndicator} />
+            ) : (
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <View style={styles.imageBlock}>
+                        {
+                            Brands.map((item, index) => item.images)
+                                .flat()
+                                .map(
+                                    (image, index) => {
+                                        return (
+                                            <TouchableOpacity onPress={() => navigation.navigate('SelectedBrandPage')}>
+                                                <Image style={styles.image} source={{uri: `${image.photo2x}`}}/>
+                                            </TouchableOpacity>
+                                        )
+                                    })
+                        }
+                    </View>
+                </ScrollView>
+            )
+        }
         </View>
     )
 }
@@ -89,6 +107,11 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         width: wp(30),
         height: wp(15)
+    },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

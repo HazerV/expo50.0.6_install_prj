@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {View, StyleSheet, Text, TouchableOpacity, Image} from "react-native";
+import {View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator} from "react-native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Parfum from "../../../../assets/images/Parfum.png";
 import {config} from "../../../config";
@@ -9,12 +9,14 @@ import {PageContext} from "../../../context/Context";
 import {CategoryContext} from "../../../context/CategoriesContext";
 const CategoriesBlock = ({key, img}) => {
     const navigation = useNavigation()
-    const {meshName, setMeshName} = useContext(CategoryContext)
+    const {setMeshName} = useContext(CategoryContext)
+    const [loading, setLoading] = React.useState(true)
     const [Mesh, SetMesh] = React.useState([])
     useEffect(() => {
         async function getData() {
             const get = await getMesh()
             SetMesh(get)
+            setLoading(false)
         }
         getData()
     }, []);
@@ -25,19 +27,24 @@ const CategoriesBlock = ({key, img}) => {
             </Text>
             <View style={styles.categoryBlock}>
                 {
-                    Mesh.map((item, index,) => (
-                        <TouchableOpacity onPress={() => {
-                            navigation.navigate(`CategoryPage`),
-                                setMeshName(item.title)
-                        }}>
-                            <Image style={{
-                                width: wp(45.8),
-                                height: wp(45.8),
-                                borderRadius: wp(2)
-                            }} key={index} source={{uri: `${item.image.photo2x}`}}/>
-                        </TouchableOpacity>
-                    ))
+                    loading === true ? (
+                        <ActivityIndicator color={config.accentColor} size={'large'} style={styles.activityIndicator} />
+                    ) : (
+                            Mesh.map((item, index,) => (
+                                <TouchableOpacity onPress={() => {
+                                    navigation.navigate(`CategoryPage`),
+                                        setMeshName(item.title)
+                                }}>
+                                    <Image style={{
+                                        width: wp(45.8),
+                                        height: wp(45.8),
+                                        borderRadius: wp(2)
+                                    }} key={index} source={{uri: `${item.image.photo2x}`}}/>
+                                </TouchableOpacity>
+                            ))
+                    )
                 }
+
             </View>
         </View>
     )
@@ -54,6 +61,11 @@ const styles = StyleSheet.create({
         fontFamily: config.familyBold,
         fontSize: config.fontLarge,
         lineHeight: config.lineLarge
+    },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 export default CategoriesBlock
