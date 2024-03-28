@@ -21,7 +21,7 @@ const SliderProduct = ({image}) => {
 const styles = StyleSheet.create({
     image: {
         resizeMode: 'cover',
-        width: wp(33),
+        // width: wp(33),
         height: wp(47),
         overflow: 'hidden',
         borderRadius: wp(2),

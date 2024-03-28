@@ -2,20 +2,18 @@ import React from "react";
 import {View, Text, StyleSheet, Image} from "react-native";
 import {config} from "../../../config";
 import Example from '../../../../assets/images/RectangleEx.png'
-const ProductitemInCategory = ({name, description, value, price, firstPrice}) => {
+const ProductitemInCategory = ({name, description, image, quantity, price, firstPrice}) => {
 
     return (
         <View style={styles.container}>
-            <Image source={Example} />
+            <Image source={image} />
             <Text style={styles.textName}>
                 {name}
             </Text>
             <Text style={styles.textDescription}>
-                {description}
+                Доступен от {quantity} мл
             </Text>
-            <View style={{
-                flexDirection: 'row'
-            }}>
+            <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.textPrice}>
                     {price + ' '}
                 </Text>

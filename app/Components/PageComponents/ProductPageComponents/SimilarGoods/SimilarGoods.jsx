@@ -1,10 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {View, Text, StyleSheet, ScrollView} from "react-native";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import ProductitemInCategory from "../../../GoodsComponents/ProductItem/ProductItemInCategory";
 import {config} from "../../../../config";
 
-const SimilarGoods = () => {
+const SimilarGoods = ({props}) => {
+    const [image, setImage] = useState([])
+    useEffect(() => {
+        // setImage(props.map((i) => i.images))
+        // console.log(image)
+        let arra = (props.map((i) => {
+            return {
+                // ...i,
+                images: i.images
+            }
+        }))
+        setImage(arra)
+    }, [setImage]);
+    console.log('hh', image.map((i) => i.images))
     return (
         <View style={styles.container}>
             <Text style={styles.textHead}>
@@ -15,20 +28,11 @@ const SimilarGoods = () => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
                 <View style={styles.block}>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
-                    <ProductitemInCategory description={'Доступен от 3 мл'} price={'1890'} firstPrice={2450}
-                                           name={'Духи AMOUAGE Beach Hut (на распив)'}/>
+                    {
+                        props.map((i) =>
+                            <ProductitemInCategory image={image} firstPrice={i.price_old} price={i.price} quantity={i.quantity} name={i.name}/>
+                        )
+                    }
                 </View>
             </ScrollView>
         </View>

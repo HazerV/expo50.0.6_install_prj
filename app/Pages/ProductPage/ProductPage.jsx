@@ -12,24 +12,39 @@ import Footer from "../../Components/PageComponents/Footer/Footer";
 import ProductNullBlock from "../../Components/PageComponents/ProductPageComponents/ProductNullBlock/ProductNullBlock";
 import SliderProduct from "../../Components/PageComponents/ProductPageComponents/SliderProduct/SliderProduct";
 import {ProductContext} from "../../context/ProductContext";
-import {getProductById} from "../../api/products";
-
+import {getProductById, getProductsByBrandIdLimit} from "../../api/products";
 const ProductPage = ({count, route}) => {
     const id = route.params
     const [attributes, setAttributes] = useState([])
+    const [photoProduct, setPhotoProduct] = useState([])
     const [productData, setProductData] = useState([])
+    const [photoForBrandImage, setPhotoForBrandImage] = useState([])
+    const [brandSlug, setBrandSlug] = useState([])
     const [offers, setOffers] = useState([])
     const [loading, setLoading] = useState(true)
+    const [similarProducts, setSimilarProducts] = useState([])
     useEffect(() => {
         getProductById(id.id)
             .then((res) => {
                 setOffers(res.data.offers)
                 setProductData(res.data)
+                setPhotoForBrandImage(res.data.brand_image.photo2x)
                 setAttributes(res.data.attributes)
+                setBrandSlug(res.data.brand_slug)
+                setPhotoProduct(res.data.images)
+                setSimilarProducts(res.data.similar_products)
+                console.log(attributes)
+                // getProductsByBrandIdLimit(brandSlug, 3)
+                //     .then((res) => {
+                //         // console.log('here', res.data)
+                //     })
             })
             .catch((err) => console.error(err))
-            .finally(setLoading(false))
-    }, []);
+            .finally(
+                setLoading(false)
+            )
+    }, [setOffers, setSimilarProducts, setPhotoProduct, setProductData, setPhotoForBrandImage, setAttributes, setLoading]);
+    console.log('tut', typeof photoProduct)
     return (
         loading === false ? (
             <View>
@@ -39,7 +54,12 @@ const ProductPage = ({count, route}) => {
                 <ScrollView showsVerticalScrollIndicator={false}
                             style={styles.scrollView}>
                     <View style={styles.container}>
-                        <SliderProduct/>
+                        {
+                            photoProduct.map((i) =>
+                                <SliderProduct image={i.photo} />
+                            )
+                        }
+                        <SliderProduct image={photoProduct} />
                         {
                             productData.isAvailable === false ? (
                                 <ProductNullBlock/>
@@ -74,9 +94,13 @@ const ProductPage = ({count, route}) => {
                                 )
                             }
                         </View>
-                        <BrandParfumeBlock/>
-                        <ThisBrandGoods/>
-                        <SimilarGoods/>
+                        <BrandParfumeBlock brandUrl={photoForBrandImage} />
+                        <ThisBrandGoods />
+                        {
+                            similarProducts.length !== 0  && (
+                                <SimilarGoods props={similarProducts}/>
+                            )
+                        }
                     </View>
                     <Footer/>
                 </ScrollView>
